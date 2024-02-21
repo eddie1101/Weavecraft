@@ -1,5 +1,7 @@
 package xyz.eddie.weavecraft.common.registration;
 
+import static xyz.eddie.weavecraft.WeaveCraft.MODID;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
@@ -10,7 +12,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import static xyz.eddie.weavecraft.WeaveCraft.MODID;
 
 public class DeferredBlockRegister {
 
