@@ -1,4 +1,4 @@
-# WeaveCraft
+# Weavecraft
 A Minecraft mod inspired by Noita, which brings spellcrafting to a new level:
 
 Research new, powerful spell effects
