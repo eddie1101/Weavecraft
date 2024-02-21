@@ -4,10 +4,10 @@ import net.minecraft.world.item.BlockItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import xyz.eddie.weavecraft.common.registration.DeferredItemRegister;
 
-public class WeaveCraftItems {
+public class WeavecraftItems {
 
     public static final DeferredItemRegister ITEMS = new DeferredItemRegister();
 
-    public static final DeferredItem<BlockItem> ANCIENT_VAULT_WALL = ITEMS.registerSimpleBlockItem(WeaveCraftBlocks.ANCIENT_VAULT_WALL);
+    public static final DeferredItem<BlockItem> ANCIENT_VAULT_WALL = ITEMS.registerSimpleBlockItem(WeavecraftBlocks.ANCIENT_VAULT_WALL);
     
 }

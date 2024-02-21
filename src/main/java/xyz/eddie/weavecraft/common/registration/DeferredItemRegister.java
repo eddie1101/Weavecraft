@@ -1,6 +1,6 @@
 package xyz.eddie.weavecraft.common.registration;
 
-import static xyz.eddie.weavecraft.WeaveCraft.MODID;
+import static xyz.eddie.weavecraft.Weavecraft.MODID;
 
 import java.util.ArrayList;
 import java.util.List;

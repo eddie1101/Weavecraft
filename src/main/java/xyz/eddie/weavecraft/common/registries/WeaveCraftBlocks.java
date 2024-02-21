@@ -6,7 +6,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import xyz.eddie.weavecraft.common.block.AncientVaultWall;
 import xyz.eddie.weavecraft.common.registration.DeferredBlockRegister;
 
-public class WeaveCraftBlocks {
+public class WeavecraftBlocks {
 
     public static final DeferredBlockRegister BLOCKS = new DeferredBlockRegister();
 

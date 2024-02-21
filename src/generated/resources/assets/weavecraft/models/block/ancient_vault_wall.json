@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "weavecraft:block/ancient_vault_wall"
+  }
+}
