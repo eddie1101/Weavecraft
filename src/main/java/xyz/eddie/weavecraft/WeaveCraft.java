@@ -7,6 +7,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import xyz.eddie.weavecraft.client.WeavecraftClient;
 import xyz.eddie.weavecraft.common.registries.WeavecraftBlocks;
 import xyz.eddie.weavecraft.common.registries.WeavecraftCreativeModeTabs;
 import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
@@ -25,6 +26,7 @@ public class Weavecraft
     public Weavecraft(IEventBus modEventBus) {
 
         modEventBus.register(new WeavecraftDataGenerator());
+        modEventBus.register(WeavecraftClient.class);
 
         LOGGER.info("WeaveCraft: Registering Blocks...");
         WeavecraftBlocks.BLOCKS.register(modEventBus);
