@@ -15,7 +15,7 @@ public class WeavecraftItemModelProvider extends ItemModelProvider {
 
     @Override
     public void registerModels() {
-        
+        basicItem(WeavecraftItems.PROKLITIA.get());
     }
     
 }

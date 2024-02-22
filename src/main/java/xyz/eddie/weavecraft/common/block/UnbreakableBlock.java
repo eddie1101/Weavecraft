@@ -8,6 +8,5 @@ public class UnbreakableBlock extends Block {
     public UnbreakableBlock(BlockBehaviour.Properties props) {
         super(props.destroyTime(Float.MAX_VALUE).explosionResistance(Float.MAX_VALUE));
     }
-    
-    
+
 }

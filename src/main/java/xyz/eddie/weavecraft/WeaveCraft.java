@@ -9,6 +9,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import xyz.eddie.weavecraft.common.registries.WeavecraftBlocks;
 import xyz.eddie.weavecraft.common.registries.WeavecraftCreativeModeTabs;
+import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
 import xyz.eddie.weavecraft.common.registries.WeavecraftItems;
 import xyz.eddie.weavecraft.data.WeavecraftDataGenerator;
 
@@ -29,12 +30,13 @@ public class Weavecraft
         WeavecraftBlocks.BLOCKS.register(modEventBus);
         LOGGER.info("WeaveCraft: Registering Items...");
         WeavecraftItems.ITEMS.register(modEventBus);
+        WeavecraftEntities.ENTITIES.register(modEventBus);
         WeavecraftCreativeModeTabs.CREATIVE_MODE_TABS.register(modEventBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    public static ResourceLocation wcLoc(String path) {
+    public static ResourceLocation weaveLoc(String path) {
         return new ResourceLocation("weavecraft", path);
     }
 

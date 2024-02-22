@@ -15,6 +15,7 @@ public class WeavecraftLanguageProvider extends LanguageProvider {
     @Override
     public void addTranslations() {
         add(WeavecraftItems.ANCIENT_VAULT_WALL.get(), "Ancient Vault Wall");
+        add(WeavecraftItems.PROKLITIA.get(), "Proklitia");
         add("tab.weavecraft.weavecraft_main_tab", "Weavecraft");
     }
     

@@ -1,43 +1,33 @@
 package xyz.eddie.weavecraft.common.spell;
 
-import xyz.eddie.weavecraft.common.spell.component.ConveyorComponent;
-import xyz.eddie.weavecraft.common.spell.component.EffectComponent;
-import xyz.eddie.weavecraft.common.spell.component.SpellComponent;
-import xyz.eddie.weavecraft.common.spell.component.modifier.ConveyorModifier;
-import xyz.eddie.weavecraft.common.spell.component.modifier.EffectModifier;
+import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
 public class Spell {
 
     SpellComponent rootComponent;
 
-    private Spell() {
-        rootComponent = new SpellComponent();
+    private Spell() {}
+
+    private void setRootComponent(SpellComponent root) {
+        rootComponent = root;
     }
 
     public static class SpellBuilder {
 
         Spell spell;
+        SpellComponent root;
         public SpellBuilder() {
             spell = new Spell();
+            root = new SpellComponent();
         }
 
-        public SpellBuilder conveyorModifier(ConveyorModifier modifier) {
-            return this;
-        }
-
-        public SpellBuilder conveyor(ConveyorComponent conveyor) {
-            return this;
-        }
-
-        public SpellBuilder effectModifier(EffectModifier modifier) {
-            return this;
-        }
-
-        public SpellBuilder effect(EffectComponent effect) {
+        public SpellBuilder effect(SpellEffect effect) {
+            root.setEffect(effect);
             return this;
         }
 
         public Spell build() {
+            spell.setRootComponent(root);
             return spell;
         }
 
