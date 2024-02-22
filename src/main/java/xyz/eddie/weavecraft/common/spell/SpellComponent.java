@@ -1,10 +1,14 @@
 package xyz.eddie.weavecraft.common.spell;
 
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import xyz.eddie.weavecraft.common.spell.effect.CastingContext;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
-public class SpellComponent {
+public abstract class SpellComponent {
 
     /*
 
@@ -23,10 +27,11 @@ public class SpellComponent {
 
     protected SpellEffect effect;
 
-    public SpellComponent() {}
+    protected SpellComponent() {}
 
     public void setEffect(SpellEffect effect) {
         this.effect = effect;
     }
+    public abstract void cast(CastingContext ctx);
 
 }

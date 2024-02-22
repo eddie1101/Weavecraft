@@ -1,5 +1,9 @@
 package xyz.eddie.weavecraft.common.spell;
 
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import xyz.eddie.weavecraft.common.spell.effect.CastingContext;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
 public class Spell {
@@ -12,13 +16,26 @@ public class Spell {
         rootComponent = root;
     }
 
+    public void cast(Entity caster, Level level, ItemStack proklitia) {
+        rootComponent.cast(new CastingContext(caster, level, proklitia));
+    }
+
     public static class SpellBuilder {
 
         Spell spell;
         SpellComponent root;
-        public SpellBuilder() {
+        public SpellBuilder(boolean isReflexive) {
             spell = new Spell();
-            root = new SpellComponent();
+            if(isReflexive) {
+                root = new ReflexiveSpellComponent();
+            } else {
+                root = new ExpulsiveSpellComponent();
+            }
+
+        }
+
+        public SpellBuilder() {
+            this(true);
         }
 
         public SpellBuilder effect(SpellEffect effect) {
