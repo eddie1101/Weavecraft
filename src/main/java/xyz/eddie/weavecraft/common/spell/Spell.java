@@ -4,6 +4,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
+import xyz.eddie.weavecraft.common.spell.modifier.SpellEffectModifier;
 
 public class Spell {
 
@@ -21,6 +22,8 @@ public class Spell {
 
     public static class SpellBuilder {
 
+        SpellEffect cachedEffect;
+
         Spell spell;
         SpellComponent root;
         public SpellBuilder(boolean isReflexive) {
@@ -30,7 +33,7 @@ public class Spell {
             } else {
                 root = new ExpulsiveSpellComponent();
             }
-
+            cachedEffect = null;
         }
 
         public SpellBuilder() {
@@ -38,11 +41,17 @@ public class Spell {
         }
 
         public SpellBuilder effect(SpellEffect effect) {
-            root.setEffect(effect);
+            this.cachedEffect = effect;
+            return this;
+        }
+
+        public SpellBuilder effectModifier(SpellEffectModifier modifier, int level) {
+            this.cachedEffect.applyModifier(modifier, level);
             return this;
         }
 
         public Spell build() {
+            this.root.setEffect(cachedEffect);
             spell.setRootComponent(root);
             return spell;
         }

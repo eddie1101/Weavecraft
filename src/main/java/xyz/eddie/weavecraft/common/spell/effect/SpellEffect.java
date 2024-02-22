@@ -4,6 +4,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.modifier.SpellEffectModifier;
 
 import java.util.HashMap;
@@ -25,7 +26,14 @@ public abstract class SpellEffect implements ISpellEffect {
 
         acceptedModifiers = new HashSet<>();
         appliedModifiers = new HashMap<>();
+
+        addAcceptedModifiers();
     }
+
+    protected abstract void addAcceptedModifiers();
+
+    public abstract int calcManaCost();
+    public abstract int calcCastDelay();
 
     public boolean acceptsModifier(SpellEffectModifier modifier) {
         return acceptedModifiers.contains(modifier);
@@ -33,7 +41,7 @@ public abstract class SpellEffect implements ISpellEffect {
 
     public boolean applyModifier(SpellEffectModifier modifier, int level) {
         if(acceptsModifier(modifier)) {
-            appliedModifiers.put(modifier, level);
+            appliedModifiers.put(modifier, Math.min(level, modifier.maxLevel));
             return true;
         }
         return false;
@@ -51,11 +59,11 @@ public abstract class SpellEffect implements ISpellEffect {
     }
 
     @Override
-    public void onHit(HitResult hit, Level level) {
+    public void onHit(HitResult hit, CastingContext ctx) {
         if(hit.getType() == HitResult.Type.ENTITY) {
-            onHitEntity((EntityHitResult) hit, level);
+            onHitEntity((EntityHitResult) hit, ctx);
         } else if(hit.getType() == HitResult.Type.BLOCK) {
-            onHitBlock((BlockHitResult) hit, level);
+            onHitBlock((BlockHitResult) hit, ctx);
         }
     }
 

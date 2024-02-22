@@ -10,6 +10,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.effect.IgnitionSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.PushSpellEffect;
+import xyz.eddie.weavecraft.common.spell.modifier.SpellEffectModifier;
 
 public class Proklitia extends Item {
 
@@ -17,7 +19,7 @@ public class Proklitia extends Item {
 
     public Proklitia(Properties properties) {
         super(properties);
-        spell = new Spell.SpellBuilder().effect(new IgnitionSpellEffect()).build();
+        spell = new Spell.SpellBuilder().effect(new PushSpellEffect()).effectModifier(SpellEffectModifier.INTENSITY, 5).build();
     }
 
     @Override
