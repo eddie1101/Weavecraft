@@ -1,4 +1,4 @@
-package xyz.eddie.weavecraft.common.spell.effect;
+package xyz.eddie.weavecraft.common.spell;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

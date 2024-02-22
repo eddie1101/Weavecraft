@@ -17,17 +17,6 @@ public class IgnitionSpellEffect extends SpellEffect {
     }
 
     @Override
-    public void onHit(HitResult hit, Level level) {
-        if(hit.getType() == HitResult.Type.ENTITY) {
-            onHitEntity((EntityHitResult) hit, level);
-        } else if(hit.getType() == HitResult.Type.BLOCK) {
-            onHitBlock((BlockHitResult) hit, level);
-        } else if(hit.getType() == HitResult.Type.MISS) {
-
-        }
-    }
-
-    @Override
     public void onHitBlock(BlockHitResult hit, Level level) {
         Direction direction = hit.getDirection();
         BlockPos firePos = hit.getBlockPos().offset(direction.getNormal());

@@ -1,11 +1,5 @@
 package xyz.eddie.weavecraft.common.spell;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
-import xyz.eddie.weavecraft.common.spell.effect.CastingContext;
-import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
 public abstract class SpellComponent {
