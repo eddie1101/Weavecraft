@@ -30,8 +30,9 @@ public class PushSpellEffect extends SpellEffect {
 
     @Override
     public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
-        Vec3 angle = ctx.caster.getLookAngle().normalize().scale(getModifierLevel(SpellEffectModifier.INTENSITY));
-        hit.getEntity().push(angle.x, angle.y, angle.z);
+        Vec3 force = ctx.caster.getLookAngle().normalize().scale(getModifierLevel(SpellEffectModifier.INTENSITY));
+        hit.getEntity().setDeltaMovement(hit.getEntity().getDeltaMovement().add(force));
+        hit.getEntity().hurtMarked = true;
     }
 
     @Override

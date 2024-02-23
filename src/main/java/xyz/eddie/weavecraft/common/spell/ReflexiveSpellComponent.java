@@ -10,6 +10,6 @@ public class ReflexiveSpellComponent extends SpellComponent {
 
     @Override
     public void cast(CastingContext ctx) {
-        this.effect.onHit(new EntityHitResult(ctx.caster), ctx.level);
+        this.effect.onHit(new EntityHitResult(ctx.caster), ctx);
     }
 }

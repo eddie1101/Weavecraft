@@ -19,7 +19,7 @@ public class Proklitia extends Item {
 
     public Proklitia(Properties properties) {
         super(properties);
-        spell = new Spell.SpellBuilder().effect(new PushSpellEffect()).effectModifier(SpellEffectModifier.INTENSITY, 5).build();
+        spell = new Spell.SpellBuilder().effect(new PushSpellEffect()).effectModifier(SpellEffectModifier.INTENSITY, 1).build();
     }
 
     @Override
