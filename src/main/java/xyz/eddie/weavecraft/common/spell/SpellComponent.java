@@ -1,8 +1,9 @@
 package xyz.eddie.weavecraft.common.spell;
 
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
+import xyz.eddie.weavecraft.common.spell.modifier.ModifiableSpellComponent;
 
-public abstract class SpellComponent {
+public abstract class SpellComponent extends ModifiableSpellComponent {
 
     /*
 
@@ -21,7 +22,11 @@ public abstract class SpellComponent {
 
     protected SpellEffect effect;
 
-    protected SpellComponent() {}
+    protected SpellComponent() {
+        super();
+    }
+
+
 
     public void setEffect(SpellEffect effect) {
         this.effect = effect;

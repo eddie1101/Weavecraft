@@ -1,17 +1,14 @@
 package xyz.eddie.weavecraft.common.item;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.Spell;
-import xyz.eddie.weavecraft.common.spell.effect.IgnitionSpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.PushSpellEffect;
-import xyz.eddie.weavecraft.common.spell.modifier.SpellEffectModifier;
+import xyz.eddie.weavecraft.common.spell.modifier.SpellModifier;
 
 public class Proklitia extends Item {
 
@@ -19,7 +16,11 @@ public class Proklitia extends Item {
 
     public Proklitia(Properties properties) {
         super(properties);
-        spell = new Spell.SpellBuilder().effect(new PushSpellEffect()).effectModifier(SpellEffectModifier.INTENSITY, 1).build();
+        spell = new Spell.SpellBuilder()
+                .targetModifier(SpellModifier.TOUCH)
+                .effect(new PushSpellEffect())
+                .effectModifier(SpellModifier.INTENSITY)
+                .build();
     }
 
     @Override

@@ -12,4 +12,7 @@ public interface ISpellEffect {
     void onHitEntity(EntityHitResult hit, CastingContext ctx);
     void onHitBlock(BlockHitResult hit, CastingContext ctx);
 
+    int calcManaCost();
+    int calcCastDelay();
+
 }

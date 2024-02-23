@@ -4,7 +4,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
-import xyz.eddie.weavecraft.common.spell.modifier.SpellEffectModifier;
+import xyz.eddie.weavecraft.common.spell.modifier.SpellModifier;
 
 public class Spell {
 
@@ -40,14 +40,27 @@ public class Spell {
             this(true);
         }
 
+        public SpellBuilder targetModifier(SpellModifier modifier, int level) {
+            this.root.applyModifier(modifier, level);
+            return this;
+        }
+
+        public SpellBuilder targetModifier(SpellModifier modifier) {
+            return targetModifier(modifier, 1);
+        }
+
         public SpellBuilder effect(SpellEffect effect) {
             this.cachedEffect = effect;
             return this;
         }
 
-        public SpellBuilder effectModifier(SpellEffectModifier modifier, int level) {
+        public SpellBuilder effectModifier(SpellModifier modifier, int level) {
             this.cachedEffect.applyModifier(modifier, level);
             return this;
+        }
+
+        public SpellBuilder effectModifier(SpellModifier modifier) {
+            return effectModifier(modifier, 1);
         }
 
         public Spell build() {

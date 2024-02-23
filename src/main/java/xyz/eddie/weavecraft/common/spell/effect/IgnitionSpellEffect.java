@@ -4,16 +4,11 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.modifier.SpellEffectModifier;
-
-import java.util.Arrays;
-import java.util.List;
+import xyz.eddie.weavecraft.common.spell.modifier.SpellModifier;
 
 public class IgnitionSpellEffect extends SpellEffect {
 
@@ -22,13 +17,13 @@ public class IgnitionSpellEffect extends SpellEffect {
     }
 
     @Override
-    protected void addAcceptedModifiers() {
-        this.acceptedModifiers.add(SpellEffectModifier.DURATION);
+    protected void declareAcceptedModifiers() {
+        this.acceptedModifiers.add(SpellModifier.DURATION);
     }
 
     @Override
     public int calcManaCost() {
-        return baseManaCost + getModifierLevel(SpellEffectModifier.DURATION);
+        return baseManaCost + getModifierLevel(SpellModifier.DURATION);
     }
 
     @Override
@@ -49,8 +44,8 @@ public class IgnitionSpellEffect extends SpellEffect {
     public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
         Entity entity = hit.getEntity();
         int durationSeconds = 5;
-        int durationLevel = getModifierLevel(SpellEffectModifier.DURATION);
-        durationSeconds += (Math.ceil((SpellEffectModifier.DURATION.maxLevel / (float) durationLevel) * durationSeconds));
+        int durationLevel = getModifierLevel(SpellModifier.DURATION);
+        durationSeconds += (Math.ceil((SpellModifier.DURATION.maxLevel / (float) durationLevel) * durationSeconds));
         if(entity instanceof LivingEntity le) {
             le.setSecondsOnFire(durationSeconds);
         }
