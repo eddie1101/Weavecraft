@@ -55,6 +55,9 @@ public class Spell {
         }
 
         public SpellBuilder effectModifier(SpellModifier modifier, int level) {
+            if(cachedEffect == null) {
+                throw new IllegalStateException("Tried to apply a modifier to an effect, but there is no effect. Call effect() before effectModifier().");
+            }
             this.cachedEffect.applyModifier(modifier, level);
             return this;
         }
