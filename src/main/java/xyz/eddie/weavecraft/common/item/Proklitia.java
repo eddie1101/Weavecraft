@@ -10,6 +10,7 @@ import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.effect.EffectAmplifier;
 import xyz.eddie.weavecraft.common.spell.effect.effects.IgnitionSpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.effects.PushSpellEffect;
+import xyz.eddie.weavecraft.common.spell.target.TargetGatherer;
 
 public class Proklitia extends Item {
 
@@ -17,7 +18,7 @@ public class Proklitia extends Item {
 
     public Proklitia(Properties properties) {
         super(properties);
-        spell = new Spell.SpellBuilder()
+        spell = new Spell.SpellBuilder(TargetGatherer.TOUCH)
                 .effect(PushSpellEffect::new)
                 .amplifyEffect(EffectAmplifier.INTENSITY, 2)
                 .effect(IgnitionSpellEffect::new)

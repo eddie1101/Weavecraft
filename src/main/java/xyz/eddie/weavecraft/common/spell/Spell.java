@@ -3,11 +3,17 @@ package xyz.eddie.weavecraft.common.spell;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import xyz.eddie.weavecraft.common.spell.component.ExpulsiveSpellComponent;
+import xyz.eddie.weavecraft.common.spell.component.ReflexiveSpellComponent;
+import xyz.eddie.weavecraft.common.spell.component.SpellComponent;
 import xyz.eddie.weavecraft.common.spell.effect.BaseSpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.EffectAmplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
+import xyz.eddie.weavecraft.common.spell.target.ITargetGatherer;
+import xyz.eddie.weavecraft.common.spell.target.TargetGatherer;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class Spell {
 
@@ -29,28 +35,34 @@ public class Spell {
 
         Spell spell;
         SpellComponent root;
-        public SpellBuilder(boolean isReflexive) {
+
+        public SpellBuilder(boolean isReflexive, ITargetGatherer targetGatherer, int baseManaCost, int baseCastDelay) {
             spell = new Spell();
             if(isReflexive) {
-                root = new ReflexiveSpellComponent();
+                root = new ReflexiveSpellComponent(targetGatherer);
             } else {
-                root = new ExpulsiveSpellComponent();
+                root = new ExpulsiveSpellComponent(targetGatherer);
             }
-            cachedEffect = new BaseSpellEffect();
+            cachedEffect = new BaseSpellEffect(baseManaCost, baseCastDelay);
+        }
+
+        public SpellBuilder(boolean isReflexive, TargetGatherer targetGatherer) {
+            spell = new Spell();
+            if(isReflexive) {
+                root = new ReflexiveSpellComponent(targetGatherer.get());
+            } else {
+                root = new ExpulsiveSpellComponent(targetGatherer.get());
+            }
+            cachedEffect = new BaseSpellEffect(targetGatherer.baseManaCost(), targetGatherer.getBaseCastDelay());
+        }
+
+        public SpellBuilder(TargetGatherer targetGatherer) {
+            this(true, targetGatherer);
         }
 
         public SpellBuilder() {
-            this(true);
+            this(true, TargetGatherer.REFLEX);
         }
-
-//        public SpellBuilder targetModifier(SpellModifier modifier, int level) {
-//            this.root.applyModifier(modifier, level);
-//            return this;
-//        }
-//
-//        public SpellBuilder targetModifier(SpellModifier modifier) {
-//            return targetModifier(modifier, 1);
-//        }
 
         public SpellBuilder effect(Function<ISpellEffect, ISpellEffect> supplier) {
             this.cachedEffect = supplier.apply(cachedEffect);

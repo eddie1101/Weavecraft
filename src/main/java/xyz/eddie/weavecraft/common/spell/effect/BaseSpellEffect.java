@@ -6,13 +6,19 @@ import xyz.eddie.weavecraft.common.spell.CastingContext;
 
 public class BaseSpellEffect implements ISpellEffect {
 
+    private final int baseManaCost, baseCastDelay;
+    public BaseSpellEffect(int baseManaCost, int baseCastDelay) {
+        this.baseManaCost = baseManaCost;
+        this.baseCastDelay = baseCastDelay;
+    }
+
     @Override
     public int calcManaCost() {
-        return 5;
+        return baseManaCost;
     }
 
     public int calcCastDelay() {
-        return 5;
+        return baseCastDelay;
     }
 
     @Override
