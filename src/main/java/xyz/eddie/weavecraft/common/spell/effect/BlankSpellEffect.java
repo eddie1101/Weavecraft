@@ -17,15 +17,6 @@ public class BlankSpellEffect implements ISpellEffect {
     }
 
     @Override
-    public void onHit(HitResult hit, CastingContext ctx) {
-        if(hit.getType() == HitResult.Type.ENTITY) {
-            onHitEntity((EntityHitResult) hit, ctx);
-        } else if(hit.getType() == HitResult.Type.BLOCK) {
-            onHitBlock((BlockHitResult) hit, ctx);
-        }
-    }
-
-    @Override
     public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
 
     }

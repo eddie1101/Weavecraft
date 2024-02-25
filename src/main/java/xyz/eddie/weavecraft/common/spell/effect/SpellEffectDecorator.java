@@ -24,11 +24,6 @@ public abstract class SpellEffectDecorator implements ISpellEffect {
     }
 
     @Override
-    public void onHit(HitResult hit, CastingContext ctx) {
-        effect.onHit(hit, ctx);
-    }
-
-    @Override
     public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
         effect.onHitEntity(hit, ctx);
     }

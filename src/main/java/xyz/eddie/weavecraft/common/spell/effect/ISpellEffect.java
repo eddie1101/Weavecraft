@@ -8,7 +8,13 @@ import xyz.eddie.weavecraft.common.spell.CastingContext;
 
 public interface ISpellEffect {
 
-    void onHit(HitResult hit, CastingContext ctx);
+    default void onHit(HitResult hit, CastingContext ctx) {
+        if(hit.getType() == HitResult.Type.ENTITY) {
+            onHitEntity((EntityHitResult) hit, ctx);
+        } else if(hit.getType() == HitResult.Type.BLOCK) {
+            onHitBlock((BlockHitResult) hit, ctx);
+        }
+    }
     void onHitEntity(EntityHitResult hit, CastingContext ctx);
     void onHitBlock(BlockHitResult hit, CastingContext ctx);
 
