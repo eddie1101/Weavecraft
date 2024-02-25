@@ -1,42 +1,40 @@
-package xyz.eddie.weavecraft.common.spell.effect;
+package xyz.eddie.weavecraft.common.spell.effect.effects;
 
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.modifier.SpellModifier;
+import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
 
-public class PushSpellEffect extends SpellEffect {
+public class PushSpellEffect extends SpellEffectDecorator {
 
-    public PushSpellEffect() {
-        super(3, 3);
+    public PushSpellEffect(ISpellEffect effect) {
+        super(effect);
     }
 
-    @Override
-    protected void declareAcceptedModifiers() {
-        acceptedModifiers.add(SpellModifier.INTENSITY);
-    }
 
     @Override
     public int calcManaCost() {
-        return baseManaCost * getModifierLevel(SpellModifier.INTENSITY);
+        return super.calcManaCost() + 3;
     }
 
     @Override
     public int calcCastDelay() {
-        return baseCastDelay + getModifierLevel(SpellModifier.INTENSITY);
+        return super.calcCastDelay() + 1;
     }
 
     @Override
     public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
-        Vec3 force = ctx.caster.getLookAngle().normalize().scale(getModifierLevel(SpellModifier.INTENSITY));
+        super.onHitEntity(hit, ctx);
+        Vec3 force = ctx.caster.getLookAngle().normalize().scale(2.5f);
         hit.getEntity().setDeltaMovement(hit.getEntity().getDeltaMovement().add(force));
         hit.getEntity().hurtMarked = true;
     }
 
     @Override
     public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
-        //Nothin'
+        super.onHitBlock(hit, ctx);
     }
 
 }

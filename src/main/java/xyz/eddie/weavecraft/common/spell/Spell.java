@@ -3,8 +3,11 @@ package xyz.eddie.weavecraft.common.spell;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
-import xyz.eddie.weavecraft.common.spell.modifier.SpellModifier;
+import xyz.eddie.weavecraft.common.spell.effect.BlankSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
+
+import java.util.function.Function;
 
 public class Spell {
 
@@ -22,7 +25,7 @@ public class Spell {
 
     public static class SpellBuilder {
 
-        SpellEffect cachedEffect;
+        ISpellEffect cachedEffect;
 
         Spell spell;
         SpellComponent root;
@@ -33,38 +36,38 @@ public class Spell {
             } else {
                 root = new ExpulsiveSpellComponent();
             }
-            cachedEffect = null;
+            cachedEffect = new BlankSpellEffect();
         }
 
         public SpellBuilder() {
             this(true);
         }
 
-        public SpellBuilder targetModifier(SpellModifier modifier, int level) {
-            this.root.applyModifier(modifier, level);
+//        public SpellBuilder targetModifier(SpellModifier modifier, int level) {
+//            this.root.applyModifier(modifier, level);
+//            return this;
+//        }
+//
+//        public SpellBuilder targetModifier(SpellModifier modifier) {
+//            return targetModifier(modifier, 1);
+//        }
+
+        public SpellBuilder effect(Function<ISpellEffect, ISpellEffect> supplier) {
+            this.cachedEffect = supplier.apply(cachedEffect);
             return this;
         }
 
-        public SpellBuilder targetModifier(SpellModifier modifier) {
-            return targetModifier(modifier, 1);
-        }
+//        public SpellBuilder effectModifier(SpellModifier modifier, int level) {
+//            if(cachedEffect == null) {
+//                throw new IllegalStateException("Tried to apply a modifier to an effect, but there is no effect. Call effect() before effectModifier().");
+//            }
+//            this.cachedEffect.applyModifier(modifier, level);
+//            return this;
+//        }
 
-        public SpellBuilder effect(SpellEffect effect) {
-            this.cachedEffect = effect;
-            return this;
-        }
-
-        public SpellBuilder effectModifier(SpellModifier modifier, int level) {
-            if(cachedEffect == null) {
-                throw new IllegalStateException("Tried to apply a modifier to an effect, but there is no effect. Call effect() before effectModifier().");
-            }
-            this.cachedEffect.applyModifier(modifier, level);
-            return this;
-        }
-
-        public SpellBuilder effectModifier(SpellModifier modifier) {
-            return effectModifier(modifier, 1);
-        }
+//        public SpellBuilder effectModifier(SpellModifier modifier) {
+//            return effectModifier(modifier, 1);
+//        }
 
         public Spell build() {
             this.root.setEffect(cachedEffect);

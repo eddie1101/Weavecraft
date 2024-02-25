@@ -7,8 +7,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.eddie.weavecraft.common.spell.Spell;
-import xyz.eddie.weavecraft.common.spell.effect.PushSpellEffect;
-import xyz.eddie.weavecraft.common.spell.modifier.SpellModifier;
+import xyz.eddie.weavecraft.common.spell.effect.effects.IgnitionSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.effects.PushSpellEffect;
 
 public class Proklitia extends Item {
 
@@ -17,9 +17,8 @@ public class Proklitia extends Item {
     public Proklitia(Properties properties) {
         super(properties);
         spell = new Spell.SpellBuilder()
-                .targetModifier(SpellModifier.TOUCH)
-                .effect(new PushSpellEffect())
-                .effectModifier(SpellModifier.INTENSITY)
+                .effect(PushSpellEffect::new)
+                .effect(IgnitionSpellEffect::new)
                 .build();
     }
 

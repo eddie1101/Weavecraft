@@ -1,9 +1,9 @@
 package xyz.eddie.weavecraft.common.spell;
 
-import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
-import xyz.eddie.weavecraft.common.spell.modifier.ModifiableSpellComponent;
+import xyz.eddie.weavecraft.common.spell.effect.BlankSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 
-public abstract class SpellComponent extends ModifiableSpellComponent {
+public abstract class SpellComponent implements ISpellComponent {
 
     /*
 
@@ -20,7 +20,7 @@ public abstract class SpellComponent extends ModifiableSpellComponent {
 
      */
 
-    protected SpellEffect effect;
+    protected ISpellEffect effect;
 
     protected SpellComponent() {
         super();
@@ -28,9 +28,8 @@ public abstract class SpellComponent extends ModifiableSpellComponent {
 
 
 
-    public void setEffect(SpellEffect effect) {
+    public void setEffect(ISpellEffect effect) {
         this.effect = effect;
     }
-    public abstract void cast(CastingContext ctx);
 
 }

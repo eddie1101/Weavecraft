@@ -4,17 +4,16 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.modifier.ModifiableSpellComponent;
 
-public abstract class SpellEffect extends ModifiableSpellComponent implements ISpellEffect {
+public class BlankSpellEffect implements ISpellEffect {
 
-    protected int baseManaCost;
-    protected int baseCastDelay;
+    @Override
+    public int calcManaCost() {
+        return 5;
+    }
 
-    public SpellEffect(int baseManaCost, int baseCastDelay) {
-        super();
-        this.baseManaCost = baseManaCost;
-        this.baseCastDelay = baseCastDelay;
+    public int calcCastDelay() {
+        return 5;
     }
 
     @Override
@@ -24,6 +23,16 @@ public abstract class SpellEffect extends ModifiableSpellComponent implements IS
         } else if(hit.getType() == HitResult.Type.BLOCK) {
             onHitBlock((BlockHitResult) hit, ctx);
         }
+    }
+
+    @Override
+    public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+
+    }
+
+    @Override
+    public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+
     }
 
 }
