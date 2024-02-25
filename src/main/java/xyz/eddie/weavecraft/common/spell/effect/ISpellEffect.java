@@ -6,7 +6,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 
-public interface ISpellEffect {
+public interface ISpellEffect extends IAmplifiable {
 
     default void onHit(HitResult hit, CastingContext ctx) {
         if(hit.getType() == HitResult.Type.ENTITY) {

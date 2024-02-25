@@ -2,10 +2,9 @@ package xyz.eddie.weavecraft.common.spell.effect;
 
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 
-public class BlankSpellEffect implements ISpellEffect {
+public class BaseSpellEffect implements ISpellEffect {
 
     @Override
     public int calcManaCost() {
@@ -26,4 +25,13 @@ public class BlankSpellEffect implements ISpellEffect {
 
     }
 
+    @Override
+    public int getAmplifierLevel(EffectAmplifier amplifier) {
+        return 0;
+    }
+
+    @Override
+    public void setAmplifierLevel(EffectAmplifier amplifier, int level) {
+
+    }
 }

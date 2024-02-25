@@ -3,9 +3,9 @@ package xyz.eddie.weavecraft.common.spell;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import xyz.eddie.weavecraft.common.spell.effect.BlankSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.BaseSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.EffectAmplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
 
 import java.util.function.Function;
 
@@ -36,7 +36,7 @@ public class Spell {
             } else {
                 root = new ExpulsiveSpellComponent();
             }
-            cachedEffect = new BlankSpellEffect();
+            cachedEffect = new BaseSpellEffect();
         }
 
         public SpellBuilder() {
@@ -57,17 +57,10 @@ public class Spell {
             return this;
         }
 
-//        public SpellBuilder effectModifier(SpellModifier modifier, int level) {
-//            if(cachedEffect == null) {
-//                throw new IllegalStateException("Tried to apply a modifier to an effect, but there is no effect. Call effect() before effectModifier().");
-//            }
-//            this.cachedEffect.applyModifier(modifier, level);
-//            return this;
-//        }
-
-//        public SpellBuilder effectModifier(SpellModifier modifier) {
-//            return effectModifier(modifier, 1);
-//        }
+        public SpellBuilder amplifyEffect(EffectAmplifier amplifier, int level) {
+            this.cachedEffect.setAmplifierLevel(amplifier, level);
+            return this;
+        }
 
         public Spell build() {
             this.root.setEffect(cachedEffect);

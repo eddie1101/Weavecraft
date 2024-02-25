@@ -1,6 +1,5 @@
 package xyz.eddie.weavecraft.common.spell;
 
-import xyz.eddie.weavecraft.common.spell.effect.BlankSpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 
 public abstract class SpellComponent implements ISpellComponent {
