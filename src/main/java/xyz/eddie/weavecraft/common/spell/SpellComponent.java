@@ -7,16 +7,7 @@ public abstract class SpellComponent implements ISpellComponent {
 
     /*
 
-    Spell can have multiple effects
-    Effects can trigger more spells
-    Reflexive spells are given the target
-    Expulsive spells collect targets
-    effects apply default behaviors
-    modifiers override those behaviors
-
-    onHit
-    onHitBlock
-    onHitEntity
+    TODO Amplifiers and Target Gatherers
 
      */
 

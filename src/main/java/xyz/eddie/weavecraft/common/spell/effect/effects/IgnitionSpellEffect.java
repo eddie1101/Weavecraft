@@ -2,9 +2,17 @@ package xyz.eddie.weavecraft.common.spell.effect.effects;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
@@ -30,11 +38,12 @@ public class IgnitionSpellEffect extends SpellEffectDecorator {
     @Override
     public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
         super.onHitBlock(hit, ctx);
-        Direction direction = hit.getDirection();
-        BlockPos firePos = hit.getBlockPos().offset(direction.getNormal());
-        if(ctx.level.getBlockState(firePos).is(Blocks.AIR)) {
-            ctx.level.setBlock(firePos, Blocks.FIRE.defaultBlockState(), 0);
-        }
+        BlockPos hitPos = hit.getBlockPos();
+        BlockPos ignitePos = hitPos.relative(hit.getDirection());
+        ctx.level.playSound(null, ignitePos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, ctx.level.getRandom().nextFloat() * 0.4F + 0.8F);
+        BlockState blockState = BaseFireBlock.getState(ctx.level, ignitePos);
+        ctx.level.setBlock(ignitePos, blockState, 11);
+        ctx.level.gameEvent(ctx.caster, GameEvent.BLOCK_PLACE, hitPos);
     }
 
     @Override
