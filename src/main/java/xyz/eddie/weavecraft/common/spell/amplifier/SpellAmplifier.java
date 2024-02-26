@@ -1,6 +1,6 @@
-package xyz.eddie.weavecraft.common.spell.effect;
+package xyz.eddie.weavecraft.common.spell.amplifier;
 
-public enum EffectAmplifier {
+public enum SpellAmplifier {
 
     INTENSITY(5, 1.15f, 1.1f),
     RANGE(5, 1.1f, 1.3f),
@@ -8,7 +8,7 @@ public enum EffectAmplifier {
 
     private final int maxLevel;
     private final float manaCostMult, castDelayMult;
-    EffectAmplifier(int maxLevel, float manaCostMult, float castDelayMult) {
+    SpellAmplifier(int maxLevel, float manaCostMult, float castDelayMult) {
         this.maxLevel = maxLevel;
         this.manaCostMult = manaCostMult;
         this.castDelayMult = castDelayMult;

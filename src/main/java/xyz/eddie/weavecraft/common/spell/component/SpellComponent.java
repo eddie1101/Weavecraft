@@ -5,16 +5,10 @@ import xyz.eddie.weavecraft.common.spell.target.ITargetGatherer;
 
 public abstract class SpellComponent implements ISpellComponent {
 
-    /*
-
-    TODO Target Gatherers
-
-     */
-
     protected ISpellEffect effect;
     protected ITargetGatherer targetGatherer;
 
-    protected SpellComponent(ITargetGatherer targetGatherer) {
+    public void setTargetGatherer(ITargetGatherer targetGatherer) {
         this.targetGatherer = targetGatherer;
     }
 

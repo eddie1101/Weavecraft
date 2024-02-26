@@ -7,10 +7,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.eddie.weavecraft.common.spell.Spell;
-import xyz.eddie.weavecraft.common.spell.effect.EffectAmplifier;
+import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
 import xyz.eddie.weavecraft.common.spell.effect.effects.IgnitionSpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.effects.PushSpellEffect;
-import xyz.eddie.weavecraft.common.spell.target.TargetGatherer;
 
 public class Proklitia extends Item {
 
@@ -20,9 +19,9 @@ public class Proklitia extends Item {
         super(properties);
         spell = new Spell.SpellBuilder(TargetGatherer.TOUCH)
                 .effect(PushSpellEffect::new)
-                .amplifyEffect(EffectAmplifier.INTENSITY, 2)
+                .amplifyEffect(SpellAmplifier.INTENSITY, 2)
                 .effect(IgnitionSpellEffect::new)
-                .amplifyEffect(EffectAmplifier.DURATION, 2)
+                .amplifyEffect(SpellAmplifier.DURATION, 2)
                 .build();
     }
 
@@ -30,7 +29,7 @@ public class Proklitia extends Item {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         if(!level.isClientSide) {
             spell.cast(player, level, player.getItemInHand(usedHand));
-            return InteractionResultHolder.sidedSuccess(player.getItemInHand(usedHand), level.isClientSide);
+            return InteractionResultHolder.success(player.getItemInHand(usedHand));
         } else {
             return InteractionResultHolder.pass(player.getItemInHand(usedHand));
         }

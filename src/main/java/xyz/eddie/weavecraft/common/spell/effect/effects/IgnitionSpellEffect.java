@@ -1,7 +1,6 @@
 package xyz.eddie.weavecraft.common.spell.effect.effects;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -13,24 +12,14 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.effect.EffectAmplifier;
+import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
 
 public class IgnitionSpellEffect extends SpellEffectDecorator {
 
     public IgnitionSpellEffect(ISpellEffect effect) {
-        super(effect);
-    }
-
-    @Override
-    public int calcManaCost() {
-        return super.calcManaCost() + 3;
-    }
-
-    @Override
-    public int calcCastDelay() {
-        return super.calcCastDelay() + 3;
+        super(effect, 3, 3);
     }
 
     @Override
@@ -48,7 +37,7 @@ public class IgnitionSpellEffect extends SpellEffectDecorator {
     public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
         super.onHitEntity(hit, ctx);
         Entity entity = hit.getEntity();
-        int durationSeconds = 4 + getAmplifierLevel(EffectAmplifier.DURATION) * 2;
+        int durationSeconds = 4 + getAmplifierLevel(SpellAmplifier.DURATION) * 2;
         if(entity instanceof LivingEntity le) {
             le.setSecondsOnFire(durationSeconds);
         } else if(entity instanceof ItemEntity ie) {

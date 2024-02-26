@@ -5,10 +5,16 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
+import xyz.eddie.weavecraft.common.spell.amplifier.AmplifiableSpellDeductible;
+import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
 
 import java.util.List;
 
-public class Touch implements ITargetGatherer {
+public class Touch extends AmplifiableSpellDeductible implements ITargetGatherer {
+
+    public Touch() {
+        super(5, 5);
+    }
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {
@@ -27,7 +33,7 @@ public class Touch implements ITargetGatherer {
             }
         }
 
-        return List.of(caster.pick(4.5f, 0f, false));
+        return List.of(caster.pick(4.5f + (getAmplifierLevel(SpellAmplifier.RANGE) - 1), 0f, false));
     }
 
 }

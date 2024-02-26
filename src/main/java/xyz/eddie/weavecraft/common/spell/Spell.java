@@ -7,13 +7,11 @@ import xyz.eddie.weavecraft.common.spell.component.ExpulsiveSpellComponent;
 import xyz.eddie.weavecraft.common.spell.component.ReflexiveSpellComponent;
 import xyz.eddie.weavecraft.common.spell.component.SpellComponent;
 import xyz.eddie.weavecraft.common.spell.effect.BaseSpellEffect;
-import xyz.eddie.weavecraft.common.spell.effect.EffectAmplifier;
+import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.target.ITargetGatherer;
-import xyz.eddie.weavecraft.common.spell.target.TargetGatherer;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 public class Spell {
 
@@ -69,7 +67,7 @@ public class Spell {
             return this;
         }
 
-        public SpellBuilder amplifyEffect(EffectAmplifier amplifier, int level) {
+        public SpellBuilder amplifyEffect(SpellAmplifier amplifier, int level) {
             this.cachedEffect.setAmplifierLevel(amplifier, level);
             return this;
         }

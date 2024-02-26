@@ -1,12 +1,13 @@
 package xyz.eddie.weavecraft.common.spell.effect;
 
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
+import xyz.eddie.weavecraft.common.spell.amplifier.IAmplifiable;
+import xyz.eddie.weavecraft.common.spell.ISpellDeductible;
 
-public interface ISpellEffect extends IAmplifiable {
+public interface ISpellEffect extends IAmplifiable, ISpellDeductible {
 
     default void onHit(HitResult hit, CastingContext ctx) {
         if(hit.getType() == HitResult.Type.ENTITY) {
@@ -17,8 +18,5 @@ public interface ISpellEffect extends IAmplifiable {
     }
     void onHitEntity(EntityHitResult hit, CastingContext ctx);
     void onHitBlock(BlockHitResult hit, CastingContext ctx);
-
-    int calcManaCost();
-    int calcCastDelay();
 
 }
