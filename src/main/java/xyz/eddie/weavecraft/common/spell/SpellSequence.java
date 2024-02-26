@@ -7,13 +7,13 @@ import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 
 import java.util.List;
 
-public class SpellComponent implements ISpellComponent {
+public class SpellSequence implements ISpellComponent {
 
     protected ISpellEffect effect;
     protected ISpellTargeter targeter;
     protected Spell trigger;
 
-    public SpellComponent() {
+    public SpellSequence() {
         setEffect(new BaseSpellEffect());
     }
 
@@ -22,7 +22,7 @@ public class SpellComponent implements ISpellComponent {
 
         boolean success = false;
         for(HitResult target: targets) {
-            success = success || this.effect.onHit(target, ctx);
+            success = this.effect.onHit(target, ctx) || success;
         }
 
         if(trigger != null && success) {

@@ -1,4 +1,4 @@
-package xyz.eddie.weavecraft.common.spell.component;
+package xyz.eddie.weavecraft.common.spell;
 
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 
