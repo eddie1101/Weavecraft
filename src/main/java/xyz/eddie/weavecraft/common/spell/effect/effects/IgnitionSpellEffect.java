@@ -19,7 +19,7 @@ import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
 public class IgnitionSpellEffect extends SpellEffectDecorator {
 
     public IgnitionSpellEffect(ISpellEffect effect) {
-        super(effect, 3, 3);
+        super(effect, 5, 5);
     }
 
     @Override

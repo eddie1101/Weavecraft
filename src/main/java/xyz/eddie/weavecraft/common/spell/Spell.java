@@ -9,7 +9,8 @@ import xyz.eddie.weavecraft.common.spell.component.SpellComponent;
 import xyz.eddie.weavecraft.common.spell.effect.BaseSpellEffect;
 import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.target.ITargetGatherer;
+import xyz.eddie.weavecraft.common.spell.target.ITargeter;
+import xyz.eddie.weavecraft.common.spell.target.Targeters;
 
 import java.util.function.Function;
 
@@ -34,32 +35,23 @@ public class Spell {
         Spell spell;
         SpellComponent root;
 
-        public SpellBuilder(boolean isReflexive, ITargetGatherer targetGatherer, int baseManaCost, int baseCastDelay) {
+        public SpellBuilder(boolean isReflexive) {
             spell = new Spell();
             if(isReflexive) {
-                root = new ReflexiveSpellComponent(targetGatherer);
+                root = new ReflexiveSpellComponent();
             } else {
-                root = new ExpulsiveSpellComponent(targetGatherer);
+                root = new ExpulsiveSpellComponent();
             }
-            cachedEffect = new BaseSpellEffect(baseManaCost, baseCastDelay);
-        }
-
-        public SpellBuilder(boolean isReflexive, TargetGatherer targetGatherer) {
-            spell = new Spell();
-            if(isReflexive) {
-                root = new ReflexiveSpellComponent(targetGatherer.get());
-            } else {
-                root = new ExpulsiveSpellComponent(targetGatherer.get());
-            }
-            cachedEffect = new BaseSpellEffect(targetGatherer.baseManaCost(), targetGatherer.getBaseCastDelay());
-        }
-
-        public SpellBuilder(TargetGatherer targetGatherer) {
-            this(true, targetGatherer);
+            cachedEffect = new BaseSpellEffect();
         }
 
         public SpellBuilder() {
-            this(true, TargetGatherer.REFLEX);
+            this(true);
+        }
+
+        public SpellBuilder targeter(ITargeter targeter) {
+            this.root.setTargeter(targeter);
+            return this;
         }
 
         public SpellBuilder effect(Function<ISpellEffect, ISpellEffect> supplier) {

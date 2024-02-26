@@ -10,7 +10,7 @@ import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
 
 import java.util.List;
 
-public class Touch extends AmplifiableSpellDeductible implements ITargetGatherer {
+public class Touch extends AmplifiableSpellDeductible implements ITargeter {
 
     public Touch() {
         super(5, 5);

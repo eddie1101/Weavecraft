@@ -11,7 +11,7 @@ import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
 public class PushSpellEffect extends SpellEffectDecorator {
 
     public PushSpellEffect(ISpellEffect effect) {
-        super(effect, 1, 1);
+        super(effect, 3, 1);
     }
 
     @Override

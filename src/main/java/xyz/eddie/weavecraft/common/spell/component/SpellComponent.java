@@ -1,15 +1,15 @@
 package xyz.eddie.weavecraft.common.spell.component;
 
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.target.ITargetGatherer;
+import xyz.eddie.weavecraft.common.spell.target.ITargeter;
 
 public abstract class SpellComponent implements ISpellComponent {
 
     protected ISpellEffect effect;
-    protected ITargetGatherer targetGatherer;
+    protected ITargeter targeter;
 
-    public void setTargetGatherer(ITargetGatherer targetGatherer) {
-        this.targetGatherer = targetGatherer;
+    public void setTargeter(ITargeter targeter) {
+        this.targeter = targeter;
     }
 
     public void setEffect(ISpellEffect effect) {

@@ -7,7 +7,7 @@ import xyz.eddie.weavecraft.common.spell.amplifier.AmplifiableSpellDeductible;
 
 import java.util.List;
 
-public class Reflex extends AmplifiableSpellDeductible implements ITargetGatherer {
+public class Reflex extends AmplifiableSpellDeductible implements ITargeter {
 
     public Reflex() {
         super(1, 1);

@@ -49,11 +49,7 @@ public class Weavecraft
         The ability to customize low-level aspects and behaviors of a spell in a maintainable and extensible way which
         allows for lots of emergent, dynamic, and powerful combinations
         -
-        Target gatherers implementation is way way too rigid
-        I need their behavior to be dynamic - with the current function-oriented approach it's far too
-        dynamic. Composition and delegation of some object that allows amplifiers (or something akin to amplifiers)
-        will probably be the best bet.
-
+        Trigger idea: When a projectile is cast, the projectile entity becomes the caster in the CastingContext
      */
 
 }

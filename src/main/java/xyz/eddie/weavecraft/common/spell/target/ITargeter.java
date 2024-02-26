@@ -7,7 +7,7 @@ import xyz.eddie.weavecraft.common.spell.amplifier.IAmplifiable;
 
 import java.util.List;
 
-public interface ITargetGatherer extends IAmplifiable, ISpellDeductible {
+public interface ITargeter extends IAmplifiable, ISpellDeductible {
 
     List<HitResult> gatherTargets(CastingContext ctx);
 
