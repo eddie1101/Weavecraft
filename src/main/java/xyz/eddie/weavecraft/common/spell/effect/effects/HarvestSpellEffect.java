@@ -13,14 +13,14 @@ public class HarvestSpellEffect extends SpellEffectDecorator {
     }
 
     @Override
-    public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+    public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
         super.onHitEntity(hit, ctx);
     }
 
     @Override
-    public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+    public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
         super.onHitBlock(hit, ctx);
-        ctx.level.destroyBlock(hit.getBlockPos(), true);
+        ctx.getLevel().destroyBlock(hit.getBlockPos(), true);
     }
 
 }

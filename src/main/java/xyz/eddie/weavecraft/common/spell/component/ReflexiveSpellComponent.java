@@ -11,8 +11,13 @@ public class ReflexiveSpellComponent extends SpellComponent {
     public void cast(CastingContext ctx) {
         List<HitResult> targets = targeter.gatherTargets(ctx);
 
+        boolean success = false;
         for(HitResult target: targets) {
-            this.effect.onHit(target, ctx);
+            success = this.effect.onHit(target, ctx);
+        }
+
+        if(trigger != null && success) {
+            trigger.cast(ctx);
         }
     }
 }

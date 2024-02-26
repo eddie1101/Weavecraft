@@ -19,8 +19,15 @@ public class Proklitia extends Item {
         super(properties);
         spell = new Spell.SpellBuilder()
                 .targeter(SpellTargeters.TOUCH)
-                .amplifyTargeter(Amplifier.RANGE, 2)
-                .effect(HarvestSpellEffect::new)
+                .amplifyTargeter(Amplifier.RANGE, 5)
+                .effect(DetonateSpellEffect::new)
+                .amplifyEffect(Amplifier.INTENSITY, 3)
+                .addTrigger(new Spell.SpellBuilder()
+                        .targeter(SpellTargeters.AOE)
+                        .amplifyTargeter(Amplifier.RANGE, 5)
+                        .effect(InfernoSpellEffect::new)
+                        .amplifyEffect(Amplifier.DURATION, 3)
+                        .build())
                 .build();
     }
 

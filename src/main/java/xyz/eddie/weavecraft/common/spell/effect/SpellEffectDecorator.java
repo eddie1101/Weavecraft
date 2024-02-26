@@ -15,12 +15,12 @@ public abstract class SpellEffectDecorator extends AmplifiableSpellDeductible im
     }
 
     @Override
-    public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+    public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
         effect.onHitEntity(hit, ctx);
     }
 
     @Override
-    public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+    public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
         effect.onHitBlock(hit, ctx);
     }
 }

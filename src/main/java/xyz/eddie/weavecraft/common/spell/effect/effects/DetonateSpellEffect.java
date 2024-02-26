@@ -16,18 +16,18 @@ public class DetonateSpellEffect extends SpellEffectDecorator {
     }
 
     @Override
-    public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+    public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
         super.onHitEntity(hit, ctx);
         explode(hit, ctx);
     }
 
     @Override
-    public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+    public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
         super.onHitBlock(hit, ctx);
         explode(hit, ctx);
     }
 
-    private void explode(HitResult hit, CastingContext ctx) {
-        ctx.level.explode(null, hit.getLocation().x, hit.getLocation().y, hit.getLocation().z, 1 + getAmplifierLevel(Amplifier.INTENSITY) * 2, Level.ExplosionInteraction.BLOCK);
+    private void explode(HitResult hit, final CastingContext ctx) {
+        ctx.getLevel().explode(null, hit.getLocation().x, hit.getLocation().y, hit.getLocation().z, 1 + getAmplifierLevel(Amplifier.INTENSITY) * 2, Level.ExplosionInteraction.BLOCK);
     }
 }

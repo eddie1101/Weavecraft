@@ -3,6 +3,7 @@ package xyz.eddie.weavecraft.common.spell;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.component.ExpulsiveSpellComponent;
 import xyz.eddie.weavecraft.common.spell.component.ReflexiveSpellComponent;
 import xyz.eddie.weavecraft.common.spell.component.SpellComponent;
@@ -23,8 +24,16 @@ public class Spell {
         rootComponent = root;
     }
 
+    public void cast(Entity caster, Level level, ItemStack proklitia, Vec3 position) {
+        rootComponent.cast(new CastingContext(caster, level, proklitia, position));
+    }
+
     public void cast(Entity caster, Level level, ItemStack proklitia) {
-        rootComponent.cast(new CastingContext(caster, level, proklitia));
+        rootComponent.cast(new CastingContext(caster, level, proklitia, caster.position()));
+    }
+
+    public void cast(CastingContext ctx) {
+        rootComponent.cast(ctx);
     }
 
     public static class SpellBuilder {
@@ -64,6 +73,11 @@ public class Spell {
 
         public SpellBuilder amplifyEffect(Amplifier amp, int level) {
             this.root.getEffect().setAmplifierLevel(amp, level);
+            return this;
+        }
+
+        public SpellBuilder addTrigger(Spell spell) {
+            this.root.setTrigger(spell);
             return this;
         }
 

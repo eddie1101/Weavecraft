@@ -23,18 +23,18 @@ public class InfernoSpellEffect extends SpellEffectDecorator {
     }
 
     @Override
-    public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+    public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
         super.onHitBlock(hit, ctx);
         BlockPos hitPos = hit.getBlockPos();
         BlockPos ignitePos = hitPos.relative(hit.getDirection());
-        ctx.level.playSound(null, ignitePos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, ctx.level.getRandom().nextFloat() * 0.4F + 0.8F);
-        BlockState blockState = BaseFireBlock.getState(ctx.level, ignitePos);
-        ctx.level.setBlock(ignitePos, blockState, 11);
-        ctx.level.gameEvent(ctx.caster, GameEvent.BLOCK_PLACE, hitPos);
+        ctx.getLevel().playSound(null, ignitePos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, ctx.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
+        BlockState blockState = BaseFireBlock.getState(ctx.getLevel(), ignitePos);
+        ctx.getLevel().setBlock(ignitePos, blockState, 11);
+        ctx.getLevel().gameEvent(ctx.getCaster(), GameEvent.BLOCK_PLACE, hitPos);
     }
 
     @Override
-    public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+    public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
         super.onHitEntity(hit, ctx);
         Entity entity = hit.getEntity();
         int durationSeconds = 4 + getAmplifierLevel(Amplifier.DURATION) * 2;

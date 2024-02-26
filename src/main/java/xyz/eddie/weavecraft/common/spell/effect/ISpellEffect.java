@@ -9,12 +9,15 @@ import xyz.eddie.weavecraft.common.spell.ISpellDeductible;
 
 public interface ISpellEffect extends IAmplifiable, ISpellDeductible {
 
-    default void onHit(HitResult hit, CastingContext ctx) {
+    default boolean onHit(HitResult hit, CastingContext ctx) {
         if(hit.getType() == HitResult.Type.ENTITY) {
             onHitEntity((EntityHitResult) hit, ctx);
+            return true;
         } else if(hit.getType() == HitResult.Type.BLOCK) {
             onHitBlock((BlockHitResult) hit, ctx);
+            return true;
         }
+        return false;
     }
     void onHitEntity(EntityHitResult hit, CastingContext ctx);
     void onHitBlock(BlockHitResult hit, CastingContext ctx);

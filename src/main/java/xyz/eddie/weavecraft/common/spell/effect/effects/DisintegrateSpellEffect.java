@@ -19,18 +19,18 @@ public class DisintegrateSpellEffect extends SpellEffectDecorator {
     }
 
     @Override
-    public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+    public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
         super.onHitEntity(hit, ctx);
-        hit.getEntity().hurt(ctx.level.damageSources().magic(), getAmplifierLevel(Amplifier.INTENSITY));
+        hit.getEntity().hurt(ctx.getLevel().damageSources().magic(), getAmplifierLevel(Amplifier.INTENSITY));
         if(hit.getEntity() instanceof LivingEntity le) {
             le.addEffect(new MobEffectInstance(MobEffects.WITHER, 20 + (getAmplifierLevel(Amplifier.DURATION) * 40)));
         }
     }
 
     @Override
-    public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+    public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
         super.onHitBlock(hit, ctx);
-        ctx.level.destroyBlock(hit.getBlockPos(), false);
+        ctx.getLevel().destroyBlock(hit.getBlockPos(), false);
     }
 
 }

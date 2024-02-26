@@ -14,7 +14,7 @@ public class ReflexSpellTargeter extends SpellTargeter {
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {
-        return List.of(new EntityHitResult(ctx.caster));
+        return List.of(new EntityHitResult(ctx.getCaster()));
     }
 
 }

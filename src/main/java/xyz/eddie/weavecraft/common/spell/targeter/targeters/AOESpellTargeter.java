@@ -2,6 +2,7 @@ package xyz.eddie.weavecraft.common.spell.targeter.targeters;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
@@ -19,12 +20,12 @@ public class AOESpellTargeter extends SpellTargeter {
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {
-        AABB area = new AABB(ctx.caster.blockPosition())
+        AABB area = new AABB(new BlockPos((int) ctx.getLocation().x, (int) ctx.getLocation().y, (int) ctx.getLocation().z))
                 .expandTowards(0, 1, 0)
                 .inflate(getAmplifierLevel(Amplifier.RANGE));
         List<HitResult> retVal = new ArrayList<>();
-        retVal.addAll(getBlocksInArea(area, ctx.level));
-        ctx.level.getEntities(ctx.caster, area).forEach(e -> retVal.add(new EntityHitResult(e)));
+        retVal.addAll(getBlocksInArea(area, ctx.getLevel()));
+        ctx.getLevel().getEntities(ctx.getCaster(), area).forEach(e -> retVal.add(new EntityHitResult(e)));
         return retVal;
     }
 

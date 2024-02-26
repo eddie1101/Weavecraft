@@ -15,16 +15,16 @@ public class PushSpellEffect extends SpellEffectDecorator {
     }
 
     @Override
-    public void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+    public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
         super.onHitEntity(hit, ctx);
-        Vec3 force = hit.getEntity().position().subtract(ctx.caster.position()).normalize().scale(getAmplifierLevel(Amplifier.INTENSITY));
+        Vec3 force = hit.getEntity().position().subtract(ctx.getCaster().position()).normalize().scale(getAmplifierLevel(Amplifier.INTENSITY));
         hit.getEntity().setDeltaMovement(hit.getEntity().getDeltaMovement().add(force));
         hit.getEntity().setDeltaMovement(hit.getEntity().getDeltaMovement().add(0, 0.5, 0));
         hit.getEntity().hurtMarked = true;
     }
 
     @Override
-    public void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+    public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
         super.onHitBlock(hit, ctx);
     }
 
