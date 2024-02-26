@@ -4,6 +4,6 @@ import xyz.eddie.weavecraft.common.spell.CastingContext;
 
 public interface ISpellComponent {
 
-    void cast(CastingContext ctx);
+    void activate(CastingContext ctx);
 
 }
