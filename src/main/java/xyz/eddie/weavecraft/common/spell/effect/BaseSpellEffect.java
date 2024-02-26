@@ -3,7 +3,7 @@ package xyz.eddie.weavecraft.common.spell.effect;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
+import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 
 public class BaseSpellEffect implements ISpellEffect {
 
@@ -28,12 +28,12 @@ public class BaseSpellEffect implements ISpellEffect {
     }
 
     @Override
-    public int getAmplifierLevel(SpellAmplifier amplifier) {
+    public int getAmplifierLevel(Amplifier amplifier) {
         return 0;
     }
 
     @Override
-    public void setAmplifierLevel(SpellAmplifier amplifier, int level) {
+    public void setAmplifierLevel(Amplifier amplifier, int level) {
 
     }
 }

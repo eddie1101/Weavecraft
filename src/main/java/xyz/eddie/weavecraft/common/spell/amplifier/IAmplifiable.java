@@ -2,7 +2,7 @@ package xyz.eddie.weavecraft.common.spell.amplifier;
 
 public interface IAmplifiable {
 
-    int getAmplifierLevel(SpellAmplifier amplifier);
-    void setAmplifierLevel(SpellAmplifier amplifier, int level);
+    int getAmplifierLevel(Amplifier amplifier);
+    void setAmplifierLevel(Amplifier amplifier, int level);
 
 }

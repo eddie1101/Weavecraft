@@ -1,18 +1,17 @@
-package xyz.eddie.weavecraft.common.spell.target;
+package xyz.eddie.weavecraft.common.spell.targeter.targeters;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.amplifier.AmplifiableSpellDeductible;
-import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
+import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 
 import java.util.List;
 
-public class Touch extends AmplifiableSpellDeductible implements ITargeter {
+public class TouchSpellTargeter extends SpellTargeter {
 
-    public Touch() {
+    public TouchSpellTargeter() {
         super(5, 5);
     }
 
@@ -33,7 +32,7 @@ public class Touch extends AmplifiableSpellDeductible implements ITargeter {
             }
         }
 
-        return List.of(caster.pick(4.5f + (getAmplifierLevel(SpellAmplifier.RANGE) - 1), 0f, false));
+        return List.of(caster.pick(4.5f + (getAmplifierLevel(Amplifier.RANGE) - 1), 0f, false));
     }
 
 }

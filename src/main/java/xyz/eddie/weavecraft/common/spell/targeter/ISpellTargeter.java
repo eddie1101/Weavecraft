@@ -1,4 +1,4 @@
-package xyz.eddie.weavecraft.common.spell.target;
+package xyz.eddie.weavecraft.common.spell.targeter;
 
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
@@ -7,7 +7,7 @@ import xyz.eddie.weavecraft.common.spell.amplifier.IAmplifiable;
 
 import java.util.List;
 
-public interface ITargeter extends IAmplifiable, ISpellDeductible {
+public interface ISpellTargeter extends IAmplifiable, ISpellDeductible {
 
     List<HitResult> gatherTargets(CastingContext ctx);
 

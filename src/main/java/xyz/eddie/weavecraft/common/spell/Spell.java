@@ -7,10 +7,9 @@ import xyz.eddie.weavecraft.common.spell.component.ExpulsiveSpellComponent;
 import xyz.eddie.weavecraft.common.spell.component.ReflexiveSpellComponent;
 import xyz.eddie.weavecraft.common.spell.component.SpellComponent;
 import xyz.eddie.weavecraft.common.spell.effect.BaseSpellEffect;
-import xyz.eddie.weavecraft.common.spell.amplifier.SpellAmplifier;
+import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.target.ITargeter;
-import xyz.eddie.weavecraft.common.spell.target.Targeters;
+import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 
 import java.util.function.Function;
 
@@ -30,8 +29,6 @@ public class Spell {
 
     public static class SpellBuilder {
 
-        ISpellEffect cachedEffect;
-
         Spell spell;
         SpellComponent root;
 
@@ -42,30 +39,35 @@ public class Spell {
             } else {
                 root = new ExpulsiveSpellComponent();
             }
-            cachedEffect = new BaseSpellEffect();
+
+            root.setEffect(new BaseSpellEffect());
         }
 
         public SpellBuilder() {
             this(true);
         }
 
-        public SpellBuilder targeter(ITargeter targeter) {
+        public SpellBuilder targeter(ISpellTargeter targeter) {
             this.root.setTargeter(targeter);
             return this;
         }
 
-        public SpellBuilder effect(Function<ISpellEffect, ISpellEffect> supplier) {
-            this.cachedEffect = supplier.apply(cachedEffect);
+        public SpellBuilder amplifyTargeter(Amplifier amp, int level) {
+            this.root.getTargeter().setAmplifierLevel(amp, level);
             return this;
         }
 
-        public SpellBuilder amplifyEffect(SpellAmplifier amplifier, int level) {
-            this.cachedEffect.setAmplifierLevel(amplifier, level);
+        public SpellBuilder effect(Function<ISpellEffect, ISpellEffect> supplier) {
+            this.root.setEffect(supplier.apply(this.root.getEffect()));
+            return this;
+        }
+
+        public SpellBuilder amplifyEffect(Amplifier amp, int level) {
+            this.root.getEffect().setAmplifierLevel(amp, level);
             return this;
         }
 
         public Spell build() {
-            this.root.setEffect(cachedEffect);
             spell.setRootComponent(root);
             return spell;
         }

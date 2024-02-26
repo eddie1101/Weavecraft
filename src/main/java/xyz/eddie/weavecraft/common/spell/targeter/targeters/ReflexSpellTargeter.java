@@ -1,15 +1,14 @@
-package xyz.eddie.weavecraft.common.spell.target;
+package xyz.eddie.weavecraft.common.spell.targeter.targeters;
 
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.amplifier.AmplifiableSpellDeductible;
 
 import java.util.List;
 
-public class Reflex extends AmplifiableSpellDeductible implements ITargeter {
+public class ReflexSpellTargeter extends SpellTargeter {
 
-    public Reflex() {
+    public ReflexSpellTargeter() {
         super(1, 1);
     }
 

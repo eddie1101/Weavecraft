@@ -2,7 +2,6 @@ package xyz.eddie.weavecraft.common.spell.component;
 
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.target.ITargeter;
 
 import java.util.List;
 
