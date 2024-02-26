@@ -16,9 +16,9 @@ import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
 
-public class IgnitionSpellEffect extends SpellEffectDecorator {
+public class InfernoSpellEffect extends SpellEffectDecorator {
 
-    public IgnitionSpellEffect(ISpellEffect effect) {
+    public InfernoSpellEffect(ISpellEffect effect) {
         super(effect, 5, 5);
     }
 

@@ -8,8 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
-import xyz.eddie.weavecraft.common.spell.effect.effects.IgnitionSpellEffect;
-import xyz.eddie.weavecraft.common.spell.effect.effects.PushSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.effects.*;
 import xyz.eddie.weavecraft.common.spell.targeter.targeters.SpellTargeters;
 
 public class Proklitia extends Item {
@@ -19,12 +18,9 @@ public class Proklitia extends Item {
     public Proklitia(Properties properties) {
         super(properties);
         spell = new Spell.SpellBuilder()
-                .targeter(SpellTargeters.AOE)
-                .amplifyTargeter(Amplifier.RANGE, 5)
-                .effect(PushSpellEffect::new)
-                .amplifyEffect(Amplifier.INTENSITY, 5)
-                .effect(IgnitionSpellEffect::new)
-                .amplifyEffect(Amplifier.DURATION, 2)
+                .targeter(SpellTargeters.TOUCH)
+                .amplifyTargeter(Amplifier.RANGE, 2)
+                .effect(HarvestSpellEffect::new)
                 .build();
     }
 
