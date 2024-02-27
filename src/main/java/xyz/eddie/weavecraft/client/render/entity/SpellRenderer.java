@@ -2,6 +2,7 @@ package xyz.eddie.weavecraft.client.render.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -31,14 +32,46 @@ public class SpellRenderer extends EntityRenderer<SpellEntity> {
         Matrix3f normalMatrix = matrix.last().normal();
 
         VertexConsumer vertexBuilder = renderer.getBuffer(RenderType.lightning());
-        vertex(vertexBuilder, renderMatrix, normalMatrix, -10, 10, 0, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, 10, 10, 0, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, 10, -10, 0, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, -10, -10, 0, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
+
+        matrix.mulPose(Axis.YP.rotationDegrees(90));
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+
+        matrix.mulPose(Axis.YP.rotationDegrees(180));
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+
+        matrix.mulPose(Axis.YP.rotationDegrees(270));
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+
+        matrix.mulPose(Axis.XP.rotationDegrees(90));
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+
+        matrix.mulPose(Axis.XP.rotationDegrees(270));
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+
+
     }
 
-    private void vertex(VertexConsumer vertexBuilder, Matrix4f renderMatrix, Matrix3f normalMatrix, float x, float y, float z, int light) {
-        vertexBuilder.vertex(renderMatrix, x, y, z).color(255, 255, 255, 0).uv(0, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(normalMatrix, 1, 1, 1).endVertex();
+    private void vertex(VertexConsumer vertexBuilder, Matrix4f renderMatrix, Matrix3f normalMatrix, float x, float y, float z, int r, int g, int b, int a, int light) {
+        vertexBuilder.vertex(renderMatrix, x, y, z).color(r, g, b, a).uv(0, 0).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(light).normal(normalMatrix, 1, 1, 1).endVertex();
     }
 
 }
