@@ -6,6 +6,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.effects.*;
@@ -32,7 +33,7 @@ public class Proklitia extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level level, @NotNull Player player, @NotNull InteractionHand usedHand) {
         if(!level.isClientSide) {
             spell.cast(player, level, player.getItemInHand(usedHand));
             return InteractionResultHolder.success(player.getItemInHand(usedHand));

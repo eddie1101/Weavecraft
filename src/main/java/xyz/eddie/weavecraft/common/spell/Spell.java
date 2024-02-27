@@ -79,8 +79,5 @@ public abstract class Spell {
             spell.setSpellSequence(spellSequence);
             return spell;
         }
-
-
     }
-
 }
