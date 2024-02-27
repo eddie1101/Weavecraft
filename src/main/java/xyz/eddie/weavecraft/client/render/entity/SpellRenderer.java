@@ -34,8 +34,8 @@ public class SpellRenderer extends EntityRenderer<SpellEntity> {
         VertexConsumer vertexBuilder = renderer.getBuffer(RenderType.lightning());
         vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
         vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0,  255, 0, 0, 180, light);
 
         matrix.mulPose(Axis.YP.rotationDegrees(90));
         vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
@@ -56,17 +56,16 @@ public class SpellRenderer extends EntityRenderer<SpellEntity> {
         vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
 
         matrix.mulPose(Axis.XP.rotationDegrees(90));
-        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.5f, 0.5f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.5f, 0.5f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.5f, -0.5f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.5f, -0.5f, 0, 255, 0, 0, 180, light);
 
         matrix.mulPose(Axis.XP.rotationDegrees(270));
-        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, 0.4f, 0,  255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, 0.4f, 0,   255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.4f, -0.4f, 0,  255, 0, 0, 180, light);
-        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.4f, -0.4f, 0, 255, 0, 0, 180, light);
-
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.5f, 0.5f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.5f, 0.5f, 0,   255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, 0.5f, -0.5f, 0,  255, 0, 0, 180, light);
+        vertex(vertexBuilder, renderMatrix, normalMatrix, -0.5f, -0.5f, 0, 255, 0, 0, 180, light);
 
     }
 
