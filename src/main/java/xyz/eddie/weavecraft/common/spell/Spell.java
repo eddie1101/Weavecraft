@@ -6,6 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
+import xyz.eddie.weavecraft.common.spell.expulsive.ExpulsiveSpell;
 import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 
 import java.io.Serializable;
@@ -13,7 +14,7 @@ import java.util.function.Function;
 
 public abstract class Spell implements Serializable {
 
-    SpellSequence spellSequence;
+    protected SpellSequence spellSequence;
 
     protected Spell() {
         spellSequence = new SpellSequence();
@@ -35,20 +36,17 @@ public abstract class Spell implements Serializable {
 
     public static class SpellBuilder {
 
-        Spell spell;
-        SpellSequence spellSequence;
+        protected Spell spell;
+        protected SpellSequence spellSequence;
 
-        private SpellBuilder(Spell spell) {
+        protected SpellBuilder(Spell spell) {
             this.spell = spell;
             this.spellSequence = spell.spellSequence;
         }
 
-        public static SpellBuilder reflexive() {
-            return new SpellBuilder(new ReflexiveSpell());
-        }
-
-        public static SpellBuilder expulsive() {
-            return new SpellBuilder(new ExpulsiveSpell());
+        public SpellBuilder() {
+            this.spell = new ReflexiveSpell();
+            this.spellSequence = spell.spellSequence;
         }
 
         public SpellBuilder targeter(ISpellTargeter targeter) {
@@ -80,5 +78,15 @@ public abstract class Spell implements Serializable {
             spell.setSpellSequence(spellSequence);
             return spell;
         }
+    }
+
+    public static class ExpulsiveSpellBuilder extends SpellBuilder {
+
+        public ExpulsiveSpellBuilder() {
+            super(new ExpulsiveSpell());
+        }
+
+
+
     }
 }
