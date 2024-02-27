@@ -16,7 +16,7 @@ public class WeavecraftClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer((EntityType<SpellEntity>) WeavecraftEntities.SPELL_ENTITY.get(), SpellRenderer::new);
+        event.registerEntityRenderer(WeavecraftEntities.SPELL_ENTITY.get(), SpellRenderer::new);
     }
 
 }

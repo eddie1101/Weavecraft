@@ -18,11 +18,11 @@ public class Proklitia extends Item {
 
     public Proklitia(Properties properties) {
         super(properties);
-        spell = Spell.SpellBuilder.reflexive()
-                .targeter(SpellTargeters.TOUCH)
+        spell = Spell.SpellBuilder.expulsive()
+                .targeter(SpellTargeters.REFLEX)
                 .amplifyTargeter(Amplifier.RANGE, 5)
                 .effect(SpellEffects.DETONATE)
-                .amplifyEffect(Amplifier.INTENSITY, 3)
+                .amplifyEffect(Amplifier.INTENSITY, 5)
                 .addTrigger(Spell.SpellBuilder.reflexive()
                         .targeter(SpellTargeters.AOE)
                         .amplifyTargeter(Amplifier.RANGE, 5)
