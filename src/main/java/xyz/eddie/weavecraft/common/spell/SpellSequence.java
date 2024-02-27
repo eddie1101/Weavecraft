@@ -5,9 +5,10 @@ import xyz.eddie.weavecraft.common.spell.effect.BaseSpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SpellSequence implements ISpellComponent {
+public class SpellSequence implements ISpellComponent, Serializable {
 
     protected ISpellEffect effect;
     protected ISpellTargeter targeter;

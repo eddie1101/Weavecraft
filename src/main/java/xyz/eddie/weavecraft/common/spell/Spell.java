@@ -8,9 +8,10 @@ import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 
+import java.io.Serializable;
 import java.util.function.Function;
 
-public abstract class Spell {
+public abstract class Spell implements Serializable {
 
     SpellSequence spellSequence;
 

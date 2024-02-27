@@ -1,17 +1,25 @@
 package xyz.eddie.weavecraft.common.entity;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.apache.commons.lang3.SerializationUtils;
 import xyz.eddie.weavecraft.common.registries.WeavecraftItems;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.SpellSequence;
 
+import static xyz.eddie.weavecraft.Weavecraft.LOGGER;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 public class SpellEntity extends Projectile {
 
-    private final SpellSequence spellSequence;
+    private SpellSequence spellSequence;
     private boolean activated = false;
     private int creationTimestamp = 0;
 
@@ -53,4 +61,24 @@ public class SpellEntity extends Projectile {
     protected void defineSynchedData() {
 
     }
+
+    @Override
+    protected void addAdditionalSaveData(CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+        tag.putInt("timestamp", creationTimestamp);
+        tag.putByteArray("spell", SerializationUtils.serialize(spellSequence));
+    }
+
+    @Override
+    protected void readAdditionalSaveData(CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+        creationTimestamp = tag.getInt("timestamp");
+        try {
+            spellSequence = (SpellSequence) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("spell"))).readObject();
+        } catch (IOException | RuntimeException | ClassNotFoundException e) {
+            LOGGER.error("Could not load spell for spell entity:\n" + this);
+            this.discard();
+        }
+    }
+
 }

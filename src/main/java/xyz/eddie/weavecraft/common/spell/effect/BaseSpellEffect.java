@@ -5,7 +5,9 @@ import net.minecraft.world.phys.EntityHitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 
-public class BaseSpellEffect implements ISpellEffect {
+import java.io.Serializable;
+
+public class BaseSpellEffect implements ISpellEffect, Serializable {
 
     @Override
     public int getManaCost() {

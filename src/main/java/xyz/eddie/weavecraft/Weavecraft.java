@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 public class Weavecraft
 {
     public static final String MODID = "weavecraft";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public Weavecraft(IEventBus modEventBus) {
 

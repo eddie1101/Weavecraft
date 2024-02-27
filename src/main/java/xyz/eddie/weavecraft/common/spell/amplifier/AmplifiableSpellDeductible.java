@@ -2,10 +2,11 @@ package xyz.eddie.weavecraft.common.spell.amplifier;
 
 import xyz.eddie.weavecraft.common.spell.ISpellDeductible;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AmplifiableSpellDeductible implements ISpellDeductible, IAmplifiable {
+public class AmplifiableSpellDeductible implements ISpellDeductible, IAmplifiable, Serializable {
 
     protected int manaCost;
     protected int castDelay;
