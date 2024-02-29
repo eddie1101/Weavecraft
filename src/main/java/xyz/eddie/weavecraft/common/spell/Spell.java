@@ -7,6 +7,8 @@ import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.expulsive.ExpulsiveSpell;
+import xyz.eddie.weavecraft.common.spell.expulsive.aspect.ExpulsiveAspect;
+import xyz.eddie.weavecraft.common.spell.expulsive.aspect.KineticAspect;
 import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 
 import java.io.Serializable;
@@ -55,7 +57,7 @@ public abstract class Spell implements Serializable {
         }
 
         public SpellBuilder amplifyTargeter(Amplifier amp, int level) {
-            this.spellSequence.getTargeter().setAmplifierLevel(amp, level);
+            this.spellSequence.getTargeter().amplify(amp, level);
             return this;
         }
 
@@ -65,7 +67,7 @@ public abstract class Spell implements Serializable {
         }
 
         public SpellBuilder amplifyEffect(Amplifier amp, int level) {
-            this.spellSequence.getEffect().setAmplifierLevel(amp, level);
+            this.spellSequence.getEffect().amplify(amp, level);
             return this;
         }
 
@@ -86,7 +88,20 @@ public abstract class Spell implements Serializable {
             super(new ExpulsiveSpell());
         }
 
+        public ExpulsiveSpellBuilder kineticAspect(KineticAspect kineticAspect) {
+            ((ExpulsiveSpell) spell).setKineticAspect(kineticAspect);
+            return this;
+        }
 
+        public ExpulsiveSpellBuilder amplifyKineticAspect(Amplifier amplifier, int level) {
+            ((ExpulsiveSpell) spell).getKineticAspect().amplify(amplifier, level);
+            return this;
+        }
+
+        public ExpulsiveSpellBuilder expulsiveAspect(ExpulsiveAspect expulsiveAspect) {
+            ((ExpulsiveSpell) spell).setExpulsiveAspect(expulsiveAspect);
+            return this;
+        }
 
     }
 }

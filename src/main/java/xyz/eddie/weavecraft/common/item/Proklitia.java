@@ -9,8 +9,10 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
-import xyz.eddie.weavecraft.common.spell.effect.effects.*;
-import xyz.eddie.weavecraft.common.spell.targeter.targeters.SpellTargeters;
+import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
+import xyz.eddie.weavecraft.common.spell.expulsive.aspect.ExpulsiveAspect;
+import xyz.eddie.weavecraft.common.spell.expulsive.aspect.KineticAspect;
+import xyz.eddie.weavecraft.common.spell.targeter.targeters.SpellTargeter;
 
 public class Proklitia extends Item {
 
@@ -18,18 +20,34 @@ public class Proklitia extends Item {
 
     public Proklitia(Properties properties) {
         super(properties);
+
+        // Now we're cookin'
+        // Dear god save me from builder hell
         spell = new Spell.ExpulsiveSpellBuilder()
-                .targeter(SpellTargeters.REFLEX)
-                .amplifyTargeter(Amplifier.RANGE, 5)
-                .effect(SpellEffects.DETONATE)
-                .amplifyEffect(Amplifier.INTENSITY, 5)
-                .addTrigger(new Spell.SpellBuilder()
-                        .targeter(SpellTargeters.AOE)
-                        .amplifyTargeter(Amplifier.RANGE, 5)
-                        .effect(SpellEffects.INFERNO)
-                        .amplifyEffect(Amplifier.DURATION, 3)
-                        .build())
+                .kineticAspect(KineticAspect.LINEAR)
+                .expulsiveAspect(ExpulsiveAspect.CONSTANT(
+                        new Spell.SpellBuilder()
+                                .targeter(SpellTargeter.AOE)
+                                .effect(SpellEffect.DISINTEGRATE)
+                                .build()))
+                .targeter(SpellTargeter.REFLEX)
+                .effect(SpellEffect.DETONATE)
+                .amplifyEffect(Amplifier.INTENSITY, 3)
+                .addTrigger(
+                        new Spell.ExpulsiveSpellBuilder()
+                                .kineticAspect(KineticAspect.STATIONARY)
+                                .expulsiveAspect(ExpulsiveAspect.CONSTANT(
+                                        new Spell.SpellBuilder()
+                                                .targeter(SpellTargeter.AOE)
+                                                .amplifyTargeter(Amplifier.RANGE, 5)
+                                                .effect(SpellEffect.INFERNO)
+                                                .build()))
+                                .targeter(SpellTargeter.REFLEX)
+                                .effect(SpellEffect.DETONATE)
+                                .amplifyEffect(Amplifier.INTENSITY, 5)
+                                .build())
                 .build();
+
     }
 
     @Override

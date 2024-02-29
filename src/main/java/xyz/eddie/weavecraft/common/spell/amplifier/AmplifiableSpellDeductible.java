@@ -41,11 +41,11 @@ public class AmplifiableSpellDeductible implements ISpellDeductible, IAmplifiabl
         return delay;
     }
 
-    public final int getAmplifierLevel(Amplifier amplifier) {
+    public final int getAmplifier(Amplifier amplifier) {
         return amplifiers.get(amplifier);
     }
 
-    public final void setAmplifierLevel(Amplifier amplifier, int level) {
+    public final void amplify(Amplifier amplifier, int level) {
         amplifiers.put(amplifier, Math.max(1, Math.min(level, amplifier.maxLevel())));
     }
 

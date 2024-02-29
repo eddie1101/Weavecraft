@@ -32,7 +32,7 @@ public class TouchSpellTargeter extends SpellTargeter {
                 return List.of(new EntityHitResult(e));
             }
         }
-        HitResult hit = caster.pick(4.5f + (getAmplifierLevel(Amplifier.RANGE) - 1), 0f, false);
+        HitResult hit = caster.pick(4.5f + (getAmplifier(Amplifier.RANGE) - 1), 0f, false);
         ctx.setLocation(hit.getLocation());
         return List.of(hit);
     }

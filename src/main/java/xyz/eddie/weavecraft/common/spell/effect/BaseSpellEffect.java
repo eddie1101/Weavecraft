@@ -30,12 +30,12 @@ public class BaseSpellEffect implements ISpellEffect, Serializable {
     }
 
     @Override
-    public int getAmplifierLevel(Amplifier amplifier) {
+    public int getAmplifier(Amplifier amplifier) {
         return 0;
     }
 
     @Override
-    public void setAmplifierLevel(Amplifier amplifier, int level) {
+    public void amplify(Amplifier amplifier, int level) {
 
     }
 }

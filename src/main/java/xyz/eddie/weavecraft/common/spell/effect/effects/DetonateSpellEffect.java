@@ -7,9 +7,9 @@ import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
+import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
-public class DetonateSpellEffect extends SpellEffectDecorator {
+public class DetonateSpellEffect extends SpellEffect {
 
     public DetonateSpellEffect(ISpellEffect effect) {
         super(effect, 40, 40);
@@ -28,6 +28,6 @@ public class DetonateSpellEffect extends SpellEffectDecorator {
     }
 
     private void explode(HitResult hit, final CastingContext ctx) {
-        ctx.getLevel().explode(null, hit.getLocation().x, hit.getLocation().y, hit.getLocation().z, 1 + getAmplifierLevel(Amplifier.INTENSITY) * 2, Level.ExplosionInteraction.BLOCK);
+        ctx.getLevel().explode(null, hit.getLocation().x, hit.getLocation().y, hit.getLocation().z, 1 + getAmplifier(Amplifier.INTENSITY) * 2, Level.ExplosionInteraction.BLOCK);
     }
 }

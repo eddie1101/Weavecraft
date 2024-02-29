@@ -4,9 +4,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
+import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
-public class HarvestSpellEffect extends SpellEffectDecorator {
+public class HarvestSpellEffect extends SpellEffect {
 
     public HarvestSpellEffect(ISpellEffect effect) {
         super(effect, 2, 2);

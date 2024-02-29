@@ -10,6 +10,7 @@ import java.util.Optional;
 
 public class CastingContext {
 
+    private Entity originalCaster;
     private Entity caster;
     private Level level;
     private ItemStack itemStack;
@@ -18,12 +19,21 @@ public class CastingContext {
     //Used exclusively for expulsive spells
     public Optional<HitResult> hit;
 
-    public CastingContext(Entity caster, Level level, ItemStack itemStack, Vec3 location) {
+    public CastingContext(Entity originalCaster, Entity caster, Level level, ItemStack itemStack, Vec3 location) {
+        this.originalCaster = originalCaster;
         this.caster = caster;
         this.level = level;
         this.itemStack = itemStack;
         this.location = location;
         hit = Optional.empty();
+    }
+
+    public CastingContext(Entity caster, Level level, ItemStack itemStack, Vec3 location) {
+        this(caster, caster, level, itemStack, location);
+    }
+
+    public Entity getOriginalCaster() {
+        return caster;
     }
 
     public Entity getCaster() {
@@ -44,6 +54,10 @@ public class CastingContext {
 
     public Optional<HitResult> getHit() {
         return hit;
+    }
+
+    public void setOriginalCaster(Entity originalCaster) {
+        this.originalCaster = originalCaster;
     }
 
     public void setCaster(Entity caster) {

@@ -14,9 +14,9 @@ import net.minecraft.world.phys.EntityHitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.effect.SpellEffectDecorator;
+import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
-public class InfernoSpellEffect extends SpellEffectDecorator {
+public class InfernoSpellEffect extends SpellEffect {
 
     public InfernoSpellEffect(ISpellEffect effect) {
         super(effect, 5, 5);
@@ -37,7 +37,7 @@ public class InfernoSpellEffect extends SpellEffectDecorator {
     public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
         super.onHitEntity(hit, ctx);
         Entity entity = hit.getEntity();
-        int durationSeconds = 4 + getAmplifierLevel(Amplifier.DURATION) * 2;
+        int durationSeconds = 4 + getAmplifier(Amplifier.DURATION) * 2;
         if(entity instanceof LivingEntity le) {
             le.setSecondsOnFire(durationSeconds);
         } else if(entity instanceof ItemEntity ie) {

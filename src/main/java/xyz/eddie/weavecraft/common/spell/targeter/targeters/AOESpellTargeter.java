@@ -21,7 +21,7 @@ public class AOESpellTargeter extends SpellTargeter {
     public List<HitResult> gatherTargets(CastingContext ctx) {
         AABB area = new AABB(new BlockPos((int) ctx.getLocation().x, (int) ctx.getLocation().y, (int) ctx.getLocation().z))
                 .expandTowards(0, 1, 0)
-                .inflate(getAmplifierLevel(Amplifier.RANGE));
+                .inflate(getAmplifier(Amplifier.RANGE));
         List<HitResult> retVal = new ArrayList<>(getBlocksInArea(area, ctx.getLevel()));
         ctx.getLevel().getEntities(ctx.getCaster(), area).forEach(e -> retVal.add(new EntityHitResult(e)));
         return retVal;
