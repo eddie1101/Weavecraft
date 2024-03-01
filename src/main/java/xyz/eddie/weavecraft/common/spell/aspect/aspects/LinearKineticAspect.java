@@ -1,8 +1,9 @@
-package xyz.eddie.weavecraft.common.spell.expulsive.aspect;
+package xyz.eddie.weavecraft.common.spell.aspect.aspects;
 
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
+import xyz.eddie.weavecraft.common.spell.aspect.KineticAspect;
 
 public class LinearKineticAspect extends KineticAspect {
 

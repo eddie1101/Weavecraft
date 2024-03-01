@@ -1,7 +1,10 @@
-package xyz.eddie.weavecraft.common.spell.targeter.targeters;
+package xyz.eddie.weavecraft.common.spell.targeter;
 
 import xyz.eddie.weavecraft.common.spell.amplifier.AmplifiableSpellDeductible;
 import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
+import xyz.eddie.weavecraft.common.spell.targeter.targeters.AOESpellTargeter;
+import xyz.eddie.weavecraft.common.spell.targeter.targeters.ReflexSpellTargeter;
+import xyz.eddie.weavecraft.common.spell.targeter.targeters.TouchSpellTargeter;
 
 public abstract class SpellTargeter extends AmplifiableSpellDeductible implements ISpellTargeter {
 

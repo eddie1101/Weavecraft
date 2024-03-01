@@ -1,7 +1,8 @@
-package xyz.eddie.weavecraft.common.spell.expulsive.aspect;
+package xyz.eddie.weavecraft.common.spell.aspect.aspects;
 
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.Spell;
+import xyz.eddie.weavecraft.common.spell.aspect.ExpulsiveAspect;
 
 public class ConstantExpulsiveAspect extends ExpulsiveAspect {
 

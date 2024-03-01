@@ -3,6 +3,7 @@ package xyz.eddie.weavecraft.common.spell.targeter.targeters;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
+import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
 
 import java.util.List;
 

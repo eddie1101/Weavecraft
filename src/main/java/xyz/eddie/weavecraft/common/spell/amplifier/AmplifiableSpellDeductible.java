@@ -1,12 +1,12 @@
 package xyz.eddie.weavecraft.common.spell.amplifier;
 
-import xyz.eddie.weavecraft.common.spell.ISpellDeductible;
+import xyz.eddie.weavecraft.common.spell.SpellDeductible;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AmplifiableSpellDeductible implements ISpellDeductible, IAmplifiable, Serializable {
+public class AmplifiableSpellDeductible extends SpellDeductible implements IAmplifiable, Serializable {
 
     protected int manaCost;
     protected int castDelay;
@@ -14,8 +14,7 @@ public class AmplifiableSpellDeductible implements ISpellDeductible, IAmplifiabl
     protected Map<Amplifier, Integer> amplifiers;
 
     public AmplifiableSpellDeductible(int manaCost, int castDelay) {
-        this.manaCost = manaCost;
-        this.castDelay = castDelay;
+        super(manaCost, castDelay);
 
         amplifiers = new HashMap<>();
         amplifiers.put(Amplifier.INTENSITY, 1);

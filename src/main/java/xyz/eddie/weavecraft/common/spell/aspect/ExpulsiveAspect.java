@@ -1,16 +1,17 @@
-package xyz.eddie.weavecraft.common.spell.expulsive.aspect;
+package xyz.eddie.weavecraft.common.spell.aspect;
 
-import net.minecraft.world.entity.ExperienceOrb;
-import org.checkerframework.checker.units.qual.C;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.amplifier.AmplifiableSpellDeductible;
+import xyz.eddie.weavecraft.common.spell.aspect.aspects.ConstantExpulsiveAspect;
 
-import java.io.Serializable;
+import javax.annotation.Nullable;
 
 public abstract class ExpulsiveAspect extends AmplifiableSpellDeductible {
 
     public static ExpulsiveAspect CONSTANT(Spell spell) {return new ConstantExpulsiveAspect(spell);}
+    @Nullable
+    public static ExpulsiveAspect NULL() {return null;}
 
     protected Spell spell;
 

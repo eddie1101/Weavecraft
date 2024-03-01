@@ -6,6 +6,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
+import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
 
 import java.util.List;
 

@@ -6,6 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.Optional;
 
 public class CastingContext {
@@ -17,7 +18,7 @@ public class CastingContext {
     private Vec3 location;
 
     //Used exclusively for expulsive spells
-    public Optional<HitResult> hit;
+    public Optional<List<HitResult>> hits;
 
     public CastingContext(Entity originalCaster, Entity caster, Level level, ItemStack itemStack, Vec3 location) {
         this.originalCaster = originalCaster;
@@ -25,7 +26,7 @@ public class CastingContext {
         this.level = level;
         this.itemStack = itemStack;
         this.location = location;
-        hit = Optional.empty();
+        hits = Optional.empty();
     }
 
     public CastingContext(Entity caster, Level level, ItemStack itemStack, Vec3 location) {
@@ -52,8 +53,8 @@ public class CastingContext {
         return location;
     }
 
-    public Optional<HitResult> getHit() {
-        return hit;
+    public Optional<List<HitResult>> getHits() {
+        return hits;
     }
 
     public void setOriginalCaster(Entity originalCaster) {
@@ -76,7 +77,15 @@ public class CastingContext {
         this.location = location;
     }
 
-    public void setHit(HitResult hit) {
-        this.hit = Optional.of(hit);
+    public void setHits(List<HitResult> hits) {
+        this.hits = Optional.of(hits);
+    }
+
+    public void addHit(HitResult hit) {
+        if(this.hits.isEmpty()) {
+            hits = Optional.of(List.of(hit));
+        } else {
+            hits.get().add(hit);
+        }
     }
 }

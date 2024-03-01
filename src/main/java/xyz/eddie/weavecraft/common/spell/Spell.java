@@ -5,21 +5,25 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
+import xyz.eddie.weavecraft.common.spell.caster.ISpellCaster;
+import xyz.eddie.weavecraft.common.spell.caster.SpellCaster;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
-import xyz.eddie.weavecraft.common.spell.expulsive.ExpulsiveSpell;
-import xyz.eddie.weavecraft.common.spell.expulsive.aspect.ExpulsiveAspect;
-import xyz.eddie.weavecraft.common.spell.expulsive.aspect.KineticAspect;
+import xyz.eddie.weavecraft.common.spell.aspect.ExpulsiveAspect;
+import xyz.eddie.weavecraft.common.spell.aspect.KineticAspect;
+import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
 import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 
 import java.io.Serializable;
 import java.util.function.Function;
 
-public abstract class Spell implements Serializable {
+public class Spell implements Serializable {
 
     protected SpellSequence spellSequence;
+    protected ISpellCaster caster;
 
-    protected Spell() {
-        spellSequence = new SpellSequence();
+    protected Spell(ISpellCaster caster, SpellSequence sequence) {
+        this.spellSequence = sequence;
+        this.caster = caster;
     }
 
     private void setSpellSequence(SpellSequence root) {
@@ -34,21 +38,18 @@ public abstract class Spell implements Serializable {
        cast(new CastingContext(caster, level, proklitia, caster.position()));
     }
 
-    public abstract void cast(CastingContext ctx);
+    public void cast(CastingContext ctx) {
+        caster.cast(ctx, spellSequence);
+    }
 
     public static class SpellBuilder {
 
         protected Spell spell;
         protected SpellSequence spellSequence;
-
-        protected SpellBuilder(Spell spell) {
-            this.spell = spell;
-            this.spellSequence = spell.spellSequence;
-        }
+        protected ISpellCaster caster;
 
         public SpellBuilder() {
-            this.spell = new ReflexiveSpell();
-            this.spellSequence = spell.spellSequence;
+            this.spellSequence = new SpellSequence();
         }
 
         public SpellBuilder targeter(ISpellTargeter targeter) {
@@ -76,32 +77,19 @@ public abstract class Spell implements Serializable {
             return this;
         }
 
+        public SpellBuilder caster(ISpellCaster caster) {
+            this.caster = caster;
+            return this;
+        }
+
+        public SpellBuilder shape(ISpellShape shape) {
+            this.caster.setShape(shape);
+            return this;
+        }
+
         public Spell build() {
-            spell.setSpellSequence(spellSequence);
+            spell = new Spell(caster, spellSequence);
             return spell;
         }
-    }
-
-    public static class ExpulsiveSpellBuilder extends SpellBuilder {
-
-        public ExpulsiveSpellBuilder() {
-            super(new ExpulsiveSpell());
-        }
-
-        public ExpulsiveSpellBuilder kineticAspect(KineticAspect kineticAspect) {
-            ((ExpulsiveSpell) spell).setKineticAspect(kineticAspect);
-            return this;
-        }
-
-        public ExpulsiveSpellBuilder amplifyKineticAspect(Amplifier amplifier, int level) {
-            ((ExpulsiveSpell) spell).getKineticAspect().amplify(amplifier, level);
-            return this;
-        }
-
-        public ExpulsiveSpellBuilder expulsiveAspect(ExpulsiveAspect expulsiveAspect) {
-            ((ExpulsiveSpell) spell).setExpulsiveAspect(expulsiveAspect);
-            return this;
-        }
-
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
+import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
 
 import java.util.ArrayList;
 import java.util.Iterator;

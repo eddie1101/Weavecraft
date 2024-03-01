@@ -1,10 +1,10 @@
-package xyz.eddie.weavecraft.common.spell.expulsive.aspect;
+package xyz.eddie.weavecraft.common.spell.aspect;
 
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.amplifier.AmplifiableSpellDeductible;
-
-import java.io.Serializable;
+import xyz.eddie.weavecraft.common.spell.aspect.aspects.LinearKineticAspect;
+import xyz.eddie.weavecraft.common.spell.aspect.aspects.StationaryKineticAspect;
 
 public abstract class KineticAspect extends AmplifiableSpellDeductible {
 

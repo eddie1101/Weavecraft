@@ -15,9 +15,8 @@ import org.apache.commons.lang3.SerializationUtils;
 import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.SpellSequence;
-import xyz.eddie.weavecraft.common.spell.expulsive.ExpulsiveSpell;
-import xyz.eddie.weavecraft.common.spell.expulsive.aspect.ExpulsiveAspect;
-import xyz.eddie.weavecraft.common.spell.expulsive.aspect.KineticAspect;
+import xyz.eddie.weavecraft.common.spell.aspect.ExpulsiveAspect;
+import xyz.eddie.weavecraft.common.spell.aspect.KineticAspect;
 
 import javax.annotation.Nullable;
 
@@ -46,7 +45,6 @@ public class SpellEntity extends Projectile {
         this.expulsiveAspect = expulsiveAspect;
         this.setPos(x, y, z);
         castingTimestamp = tickCount;
-        this.shootFromRotation(this.ctx.getCaster(), this.ctx.getCaster().getXRot(), this.ctx.getCaster().getYRot(), 0.0F, 0, 0);
         this.setOwner(ctx.getOriginalCaster());
         this.ctx.setCaster(this);
     }
@@ -136,7 +134,7 @@ public class SpellEntity extends Projectile {
     public void onHit(HitResult hit) {
         super.onHit(hit);
         if(hit.getType() != HitResult.Type.MISS) {
-            ctx.setHit(hit);
+            ctx.addHit(hit);
             this.activated = true;
         }
     }
