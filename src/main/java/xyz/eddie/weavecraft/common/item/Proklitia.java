@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import xyz.eddie.weavecraft.common.spell.Spell;
+import xyz.eddie.weavecraft.common.spell.SpellSequence;
 import xyz.eddie.weavecraft.common.spell.caster.SpellCaster;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 import xyz.eddie.weavecraft.common.spell.shape.SpellShape;
@@ -20,12 +21,15 @@ public class Proklitia extends Item {
     public Proklitia(Properties properties) {
         super(properties);
 
-        spell = new Spell.SpellBuilder()
-                .caster(SpellCaster.SINGLE())
-                .shape(SpellShape.PROJECTILE)
-                .targeter(SpellTargeter.HIT)
-                .effect(SpellEffect.DISINTEGRATE)
-                .build();
+        spell = new Spell(
+                SpellCaster.SCATTER(5,
+                        SpellShape.PROJECTILE,
+                        new SpellSequence(
+                                SpellEffect.DETONATE,
+                                SpellTargeter.HIT
+                        )
+                )
+        );
     }
 
     @Override

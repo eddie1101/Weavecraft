@@ -2,20 +2,21 @@ package xyz.eddie.weavecraft.common.spell.caster.casters;
 
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.SpellSequence;
-import xyz.eddie.weavecraft.common.spell.caster.SpellCaster;
+import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
 
-public class ScatterSpellCaster extends SpellCaster {
+public class ScatterSpellCaster extends SingleSpellCaster {
 
     int frags;
 
-    public ScatterSpellCaster(int frags) {
-        super();
+    public ScatterSpellCaster(int frags, ISpellShape shape, SpellSequence sequence) {
+        super(shape, sequence);
         this.frags = frags;
     }
 
-    public void cast(CastingContext ctx, SpellSequence sequence) {
+    @Override
+    public void cast(CastingContext ctx) {
         for(int i = 0; i < frags; i++) {
-            shape.create(ctx, sequence, 0.3f * frags, 0f, 0f);
+            shape.create(ctx, sequence, 1 + (2 * (frags - 1)), 0f, 0f);
         }
     }
 

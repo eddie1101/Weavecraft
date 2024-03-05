@@ -33,6 +33,11 @@ public class CastingContext {
         this(caster, caster, level, itemStack, location);
     }
 
+    public CastingContext(CastingContext o) {
+        this(o.originalCaster, o.caster, o.level, o.itemStack, o.location);
+        this.hits = o.hits;
+    }
+
     public Entity getOriginalCaster() {
         return originalCaster;
     }

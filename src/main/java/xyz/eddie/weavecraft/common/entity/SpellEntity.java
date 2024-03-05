@@ -37,11 +37,11 @@ public class SpellEntity extends Projectile {
     public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKineticFormula kineticFormula, double x, double y, double z) {
         super(type, level);
         this.spellSequence = spellSequence;
-        this.ctx = ctx;
+        this.ctx = new CastingContext(ctx);
         this.kineticFormula = kineticFormula;
         this.setPos(x, y, z);
         castingTimestamp = tickCount;
-        this.setOwner(ctx.getOriginalCaster());
+        this.setOwner(this.ctx.getOriginalCaster());
         this.ctx.setCaster(this);
     }
 
@@ -75,12 +75,13 @@ public class SpellEntity extends Projectile {
 
         this.setPos(this.position().add(this.getDeltaMovement()));
 
-        HitResult hit = getImminentCollision(position(), position().add(getDeltaMovement()));
-        if(hit != null) {
-            onHit(hit);
-        }
-
         if(!level().isClientSide) {
+
+            HitResult hit = getImminentCollision(position(), position().add(getDeltaMovement()));
+            if(hit != null) {
+                onHit(hit);
+            }
+
             if (getTimeAlive() > 200) {
                 activated = true;
             }

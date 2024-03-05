@@ -11,7 +11,7 @@ public class ProjectileSpellShape extends SpellShape {
 
     public void create(CastingContext ctx, SpellSequence sequence, float inaccuracy, float xAngle, float yAngle) {
         SpellEntity projectile = new SpellEntity(WeavecraftEntities.SPELL_ENTITY.get(), ctx.getLevel(), sequence, ctx, KineticFormula.LINEAR_ACCELERATION, ctx.getOriginalCaster().getEyePosition());
-        projectile.shootFromRotation(ctx.getOriginalCaster(), ctx.getOriginalCaster().getXRot() + xAngle, ctx.getOriginalCaster().getYRot() + yAngle, 0.0F, 1, 1.0f);
+        projectile.shootFromRotation(ctx.getOriginalCaster(), ctx.getOriginalCaster().getXRot() + xAngle, ctx.getOriginalCaster().getYRot() + yAngle, 0.0F, 1, 1f + inaccuracy);
         ctx.getLevel().addFreshEntity(projectile);
     }
 
