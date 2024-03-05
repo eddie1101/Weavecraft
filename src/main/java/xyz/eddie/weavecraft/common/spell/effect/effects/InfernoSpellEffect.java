@@ -12,19 +12,14 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
+
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
-public class InfernoSpellEffect extends SpellEffect {
-
-    public InfernoSpellEffect(ISpellEffect effect) {
-        super(effect, 5, 5);
-    }
+public class InfernoSpellEffect implements ISpellEffect {
 
     @Override
     public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
-        super.onHitBlock(hit, ctx);
         BlockPos hitPos = hit.getBlockPos();
         BlockPos ignitePos = hitPos.relative(hit.getDirection());
         ctx.getLevel().playSound(null, ignitePos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, ctx.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
@@ -35,9 +30,8 @@ public class InfernoSpellEffect extends SpellEffect {
 
     @Override
     public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {
-        super.onHitEntity(hit, ctx);
         Entity entity = hit.getEntity();
-        int durationSeconds = 4 + getAmplifier(Amplifier.DURATION) * 2;
+        int durationSeconds = 6;
         if(entity instanceof LivingEntity le) {
             le.setSecondsOnFire(durationSeconds);
         } else if(entity instanceof ItemEntity ie) {

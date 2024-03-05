@@ -34,7 +34,7 @@ public class CastingContext {
     }
 
     public Entity getOriginalCaster() {
-        return caster;
+        return originalCaster;
     }
 
     public Entity getCaster() {

@@ -5,16 +5,11 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.amplifier.Amplifier;
 import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
 
 import java.util.List;
 
 public class TouchSpellTargeter extends SpellTargeter {
-
-    public TouchSpellTargeter() {
-        super(5, 5);
-    }
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {
@@ -33,7 +28,7 @@ public class TouchSpellTargeter extends SpellTargeter {
                 return List.of(new EntityHitResult(e));
             }
         }
-        HitResult hit = caster.pick(4.5f + (getAmplifier(Amplifier.RANGE) - 1), 0f, false);
+        HitResult hit = caster.pick(4.5f, 0f, false);
         ctx.setLocation(hit.getLocation());
         return List.of(hit);
     }

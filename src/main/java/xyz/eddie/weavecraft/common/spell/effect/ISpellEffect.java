@@ -4,10 +4,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.amplifier.IAmplifiable;
-import xyz.eddie.weavecraft.common.spell.ISpellDeductible;
 
-public interface ISpellEffect extends IAmplifiable, ISpellDeductible {
+import java.io.Serializable;
+
+public interface ISpellEffect extends Serializable {
 
     default boolean onHit(HitResult hit, CastingContext ctx) {
         if(hit.getType() == HitResult.Type.ENTITY) {
@@ -19,7 +19,11 @@ public interface ISpellEffect extends IAmplifiable, ISpellDeductible {
         }
         return false;
     }
-    void onHitEntity(EntityHitResult hit, CastingContext ctx);
-    void onHitBlock(BlockHitResult hit, CastingContext ctx);
+    default void onHitEntity(EntityHitResult hit, CastingContext ctx) {
+
+    }
+    default void onHitBlock(BlockHitResult hit, CastingContext ctx) {
+
+    }
 
 }

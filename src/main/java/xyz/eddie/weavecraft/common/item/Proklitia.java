@@ -22,11 +22,10 @@ public class Proklitia extends Item {
 
         spell = new Spell.SpellBuilder()
                 .caster(SpellCaster.SINGLE())
-                .shape(SpellShape.NO_SHAPE)
-                .targeter(SpellTargeter.TOUCH)
+                .shape(SpellShape.PROJECTILE)
+                .targeter(SpellTargeter.HIT)
                 .effect(SpellEffect.DISINTEGRATE)
                 .build();
-
     }
 
     @Override

@@ -15,8 +15,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.SpellSequence;
-import xyz.eddie.weavecraft.common.spell.aspect.ExpulsiveAspect;
-import xyz.eddie.weavecraft.common.spell.aspect.KineticAspect;
+import xyz.eddie.weavecraft.common.spell.kinetic_formula.IKineticFormula;
 
 import javax.annotation.Nullable;
 
@@ -28,35 +27,31 @@ import java.io.ObjectInputStream;
 
 public class SpellEntity extends Projectile {
 
-    private KineticAspect kineticAspect;
-    @Nullable
-    private ExpulsiveAspect expulsiveAspect;
+    private IKineticFormula kineticFormula;
 
     private CastingContext ctx;
     private SpellSequence spellSequence;
     private boolean activated = false;
     private int castingTimestamp = 0;
 
-    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, KineticAspect kineticAspect, ExpulsiveAspect expulsiveAspect, double x, double y, double z) {
+    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKineticFormula kineticFormula, double x, double y, double z) {
         super(type, level);
         this.spellSequence = spellSequence;
         this.ctx = ctx;
-        this.kineticAspect = kineticAspect;
-        this.expulsiveAspect = expulsiveAspect;
+        this.kineticFormula = kineticFormula;
         this.setPos(x, y, z);
         castingTimestamp = tickCount;
         this.setOwner(ctx.getOriginalCaster());
         this.ctx.setCaster(this);
     }
 
-    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, KineticAspect kineticAspect, ExpulsiveAspect expulsiveAspect, Vec3 pos) {
-        this(type, level, spellSequence, ctx, kineticAspect, expulsiveAspect, pos.x, pos.y, pos.z);
+    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKineticFormula kineticFormula, Vec3 pos) {
+        this(type, level, spellSequence, ctx, kineticFormula, pos.x, pos.y, pos.z);
     }
 
     public SpellEntity(SpellEntity o) {
         super(WeavecraftEntities.SPELL_ENTITY.get(), o.level());
-        this.kineticAspect = o.kineticAspect;
-        this.expulsiveAspect = o.expulsiveAspect;
+        this.kineticFormula = o.kineticFormula;
         this.ctx = o.ctx;
         this.spellSequence = o.spellSequence;
         this.activated = o.activated;
@@ -86,23 +81,23 @@ public class SpellEntity extends Projectile {
         }
 
         if(!level().isClientSide) {
-            if (tickCount - castingTimestamp > 20) {
+            if (getTimeAlive() > 200) {
                 activated = true;
             }
 
             ctx.setLocation(position());
-
-            if (expulsiveAspect != null && expulsiveAspect.shouldCast(ctx)) {
-                expulsiveAspect.cast(ctx);
-            }
 
             if (activated) {
                 spellSequence.activate(ctx);
                 this.discard();
             }
 
-            this.addDeltaMovement(kineticAspect.calculateAcceleration(ctx));
+            this.addDeltaMovement(kineticFormula.calculateAcceleration(ctx));
         }
+    }
+
+    public int getTimeAlive() {
+        return tickCount - castingTimestamp;
     }
 
     public EntityHitResult findHitEntity(Vec3 pos, Vec3 vel) {
@@ -149,8 +144,7 @@ public class SpellEntity extends Projectile {
         super.addAdditionalSaveData(tag);
         tag.putInt("timestamp", castingTimestamp);
         tag.putByteArray("spell", SerializationUtils.serialize(spellSequence));
-        tag.putByteArray("kinetic", SerializationUtils.serialize(kineticAspect));
-        tag.putByteArray("expulsive", SerializationUtils.serialize(expulsiveAspect));
+        tag.putByteArray("kinetic", SerializationUtils.serialize(kineticFormula));
     }
 
     @Override
@@ -159,8 +153,7 @@ public class SpellEntity extends Projectile {
         castingTimestamp = tag.getInt("timestamp");
         try {
             spellSequence = (SpellSequence) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("spell"))).readObject();
-            kineticAspect = (KineticAspect) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("kinetic"))).readObject();
-            expulsiveAspect = (ExpulsiveAspect) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("expulsive"))).readObject();
+            kineticFormula = (IKineticFormula) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("kinetic"))).readObject();
         } catch (IOException | RuntimeException | ClassNotFoundException e) {
             LOGGER.error("Could not load spell for spell entity:\n" + this);
             this.discard();
