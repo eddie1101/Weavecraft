@@ -17,9 +17,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.SpellSequence;
-import xyz.eddie.weavecraft.common.spell.kinetic_formula.IKineticFormula;
-
-import javax.annotation.Nullable;
+import xyz.eddie.weavecraft.common.spell.kinematic_profile.IKinematicProfile;
 
 import static xyz.eddie.weavecraft.Weavecraft.LOGGER;
 
@@ -29,14 +27,14 @@ import java.io.ObjectInputStream;
 
 public class SpellEntity extends Projectile {
 
-    private IKineticFormula kineticFormula;
+    private IKinematicProfile kineticFormula;
 
     private CastingContext ctx;
     private SpellSequence spellSequence;
     private boolean activated = false;
     private int castingTimestamp = 0;
 
-    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKineticFormula kineticFormula, double x, double y, double z) {
+    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKinematicProfile kineticFormula, double x, double y, double z) {
         super(type, level);
         this.spellSequence = spellSequence;
         this.ctx = new CastingContext(ctx);
@@ -47,7 +45,7 @@ public class SpellEntity extends Projectile {
         this.ctx.setCaster(this);
     }
 
-    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKineticFormula kineticFormula, Vec3 pos) {
+    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKinematicProfile kineticFormula, Vec3 pos) {
         this(type, level, spellSequence, ctx, kineticFormula, pos.x, pos.y, pos.z);
     }
 
@@ -150,6 +148,17 @@ public class SpellEntity extends Projectile {
     }
 
     @Override
+    public boolean shouldRenderAtSqrDistance(double distance) {
+        double d0 = this.getBoundingBox().getSize();
+        if (Double.isNaN(d0)) {
+            d0 = 1.0;
+        }
+
+        d0 *= 512.0 * getViewScale();
+        return distance < d0 * d0;
+    }
+
+    @Override
     protected void defineSynchedData() {
 
     }
@@ -168,7 +177,7 @@ public class SpellEntity extends Projectile {
         castingTimestamp = tag.getInt("timestamp");
         try {
             spellSequence = (SpellSequence) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("spell"))).readObject();
-            kineticFormula = (IKineticFormula) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("kinetic"))).readObject();
+            kineticFormula = (IKinematicProfile) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("kinetic"))).readObject();
         } catch (IOException | RuntimeException | ClassNotFoundException e) {
             LOGGER.error("Could not load spell for spell entity:\n" + this);
             this.discard();

@@ -11,10 +11,9 @@ import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.SpellSequence;
 import xyz.eddie.weavecraft.common.spell.caster.SpellCaster;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
+import xyz.eddie.weavecraft.common.spell.kinematic_profile.KinematicProfile;
 import xyz.eddie.weavecraft.common.spell.shape.SpellShape;
 import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
-
-import java.util.List;
 
 public class Proklitia extends Item {
 
@@ -23,18 +22,32 @@ public class Proklitia extends Item {
     public Proklitia(Properties properties) {
         super(properties);
 
+//        spell = new Spell(
+//                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
+//                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
+//                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
+//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
+//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
+//                        )),
+//                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
+//                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
+//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
+//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
+//                        ))
+//                )
+//        );
+
         spell = new Spell(
-                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
-                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
-                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
-                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
-                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
-                        )),
-                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
-                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
-                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
-                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
-                        ))
+                SpellCaster.SCATTER(7,
+                        SpellShape.PROJECTILE(KinematicProfile.LINEAR_ACCELERATION),
+                        new SpellSequence(SpellEffect.DETONATE, SpellTargeter.HIT,
+                                new Spell(
+                                        SpellCaster.SCATTER(7,
+                                                SpellShape.PROJECTILE(KinematicProfile.ARCH),
+                                                new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE)
+                                        )
+                                )
+                        )
                 )
         );
     }

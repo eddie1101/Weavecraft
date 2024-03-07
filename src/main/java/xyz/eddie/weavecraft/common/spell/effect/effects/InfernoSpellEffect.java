@@ -22,7 +22,7 @@ public class InfernoSpellEffect implements ISpellEffect {
     public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {
         BlockPos hitPos = hit.getBlockPos();
         BlockPos ignitePos = hitPos.relative(hit.getDirection());
-        ctx.getLevel().playSound(null, ignitePos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 1.0F, ctx.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
+        ctx.getLevel().playSound(null, ignitePos, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS, 5.0F, ctx.getLevel().getRandom().nextFloat() * 0.4F + 0.8F);
         BlockState blockState = BaseFireBlock.getState(ctx.getLevel(), ignitePos);
         ctx.getLevel().setBlock(ignitePos, blockState, 11);
         ctx.getLevel().gameEvent(ctx.getCaster(), GameEvent.BLOCK_PLACE, hitPos);
