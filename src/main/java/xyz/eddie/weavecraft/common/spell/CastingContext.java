@@ -6,6 +6,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -88,7 +89,7 @@ public class CastingContext {
 
     public void addHit(HitResult hit) {
         if(this.hits.isEmpty()) {
-            hits = Optional.of(List.of(hit));
+            hits = Optional.of(new ArrayList<>(List.of(hit)));
         } else {
             hits.get().add(hit);
         }

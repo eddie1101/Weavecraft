@@ -4,11 +4,11 @@ import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.SpellSequence;
 import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
 
-public class ScatterSpellCaster extends SingleSpellCaster {
+public class ScatterCaster extends SingleCaster {
 
     int frags;
 
-    public ScatterSpellCaster(int frags, ISpellShape shape, SpellSequence sequence) {
+    public ScatterCaster(int frags, ISpellShape shape, SpellSequence sequence) {
         super(shape, sequence);
         this.frags = frags;
     }

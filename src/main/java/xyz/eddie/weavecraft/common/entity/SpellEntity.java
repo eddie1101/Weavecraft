@@ -1,6 +1,8 @@
 package xyz.eddie.weavecraft.common.entity;
 
+import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
@@ -72,7 +74,6 @@ public class SpellEntity extends Projectile {
     public void tick() {
         super.tick();
 
-
         this.setPos(this.position().add(this.getDeltaMovement()));
 
         if(!level().isClientSide) {
@@ -83,6 +84,7 @@ public class SpellEntity extends Projectile {
             }
 
             if (getTimeAlive() > 200) {
+                this.onHit(new EntityHitResult(this));
                 activated = true;
             }
 
@@ -95,6 +97,18 @@ public class SpellEntity extends Projectile {
 
             this.addDeltaMovement(kineticFormula.calculateAcceleration(ctx));
         }
+
+        Vec3 target = this.getDeltaMovement().normalize();
+        Vec3 vec3 = EntityAnchorArgument.Anchor.FEET.apply(this);
+        double d0 = target.x - vec3.x;
+        double d1 = target.y - vec3.y;
+        double d2 = target.z - vec3.z;
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        this.setXRot(Mth.wrapDegrees((float)(-(Mth.atan2(d1, d3) * 180.0 / 3.1415927410125732))));
+        this.setYRot(Mth.wrapDegrees((float)(Mth.atan2(d2, d0) * 180.0 / 3.1415927410125732) - 90.0F));
+        this.yRotO = this.getYRot();
+        this.xRotO = this.getXRot();
+
     }
 
     public int getTimeAlive() {

@@ -14,6 +14,8 @@ import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 import xyz.eddie.weavecraft.common.spell.shape.SpellShape;
 import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
 
+import java.util.List;
+
 public class Proklitia extends Item {
 
     Spell spell;
@@ -22,12 +24,17 @@ public class Proklitia extends Item {
         super(properties);
 
         spell = new Spell(
-                SpellCaster.SCATTER(5,
-                        SpellShape.PROJECTILE,
-                        new SpellSequence(
-                                SpellEffect.DETONATE,
-                                SpellTargeter.HIT
-                        )
+                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
+                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
+                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
+                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
+                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
+                        )),
+                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
+                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
+                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
+                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
+                        ))
                 )
         );
     }
