@@ -5,11 +5,12 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
+import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
 import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
 
 import java.util.List;
 
-public class TouchSpellTargeter extends SpellTargeter {
+public class TouchSpellTargeter implements ISpellTargeter {
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {

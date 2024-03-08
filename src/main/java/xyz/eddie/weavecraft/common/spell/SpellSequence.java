@@ -58,4 +58,8 @@ public class SpellSequence implements Serializable {
         return trigger;
     }
 
+    public void setTrigger(Spell trigger) {
+        this.trigger = trigger;
+    }
+
 }

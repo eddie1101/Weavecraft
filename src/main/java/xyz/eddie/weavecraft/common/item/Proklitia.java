@@ -15,6 +15,8 @@ import xyz.eddie.weavecraft.common.spell.kinematic_profile.KinematicProfile;
 import xyz.eddie.weavecraft.common.spell.shape.SpellShape;
 import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
 
+import java.util.List;
+
 public class Proklitia extends Item {
 
     Spell spell;
@@ -37,19 +39,25 @@ public class Proklitia extends Item {
 //                )
 //        );
 
+        SpellSequence inferno = new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE);
+
         spell = new Spell(
-                SpellCaster.SCATTER(7,
-                        SpellShape.PROJECTILE(KinematicProfile.LINEAR_ACCELERATION),
-                        new SpellSequence(SpellEffect.DETONATE, SpellTargeter.HIT,
+                SpellCaster.SINGLE(
+                        SpellShape.PROJECTILE(KinematicProfile.LINEAR),
+                        new SpellSequence(SpellEffect.DISINTEGRATE, SpellTargeter.HIT,
                                 new Spell(
-                                        SpellCaster.SCATTER(7,
-                                                SpellShape.PROJECTILE(KinematicProfile.ARCH),
-                                                new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE)
+                                        SpellCaster.BIFURCATED(
+                                                SpellShape.PROJECTILE(KinematicProfile.LINEAR),
+                                                inferno,
+                                                inferno
                                         )
                                 )
                         )
                 )
         );
+
+        inferno.setTrigger(spell);
+
     }
 
     @Override

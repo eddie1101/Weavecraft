@@ -27,4 +27,8 @@ public class Spell implements Serializable {
     public void cast(CastingContext ctx) {
         caster.cast(ctx);
     }
+
+    public ISpellCaster getCaster() {
+        return caster;
+    }
 }

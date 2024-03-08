@@ -81,7 +81,7 @@ public class SpellEntity extends Projectile {
                 onHit(hit);
             }
 
-            if (getTimeAlive() > 200) {
+            if (getTimeAlive() > 20) {
                 this.onHit(new EntityHitResult(this));
                 activated = true;
             }

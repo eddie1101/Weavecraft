@@ -16,7 +16,7 @@ public class ProjectileSpellShape implements ISpellShape {
 
     public void create(CastingContext ctx, SpellSequence sequence, float inaccuracy, float xAngle, float yAngle) {
         SpellEntity projectile = new SpellEntity(WeavecraftEntities.SPELL_ENTITY.get(), ctx.getLevel(), sequence, ctx, kp, ctx.getCaster().getEyePosition());
-        projectile.shootFromRotation(ctx.getCaster(), ctx.getCaster().getXRot() + xAngle, ctx.getCaster().getYRot() + yAngle, 0.0F, 3, 1f + inaccuracy);
+        projectile.shootFromRotation(ctx.getCaster(), ctx.getCaster().getXRot() + xAngle, ctx.getCaster().getYRot() + yAngle, 0.0F, 0.5f, 1f + inaccuracy);
         ctx.getLevel().addFreshEntity(projectile);
         projectile.hurtMarked = true;
     }
