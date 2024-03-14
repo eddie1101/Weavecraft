@@ -1,16 +1,15 @@
-package xyz.eddie.weavecraft.common.spell.targeter.targeters;
+package xyz.eddie.weavecraft.common.spell.shape.shapes;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
-import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
+import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
 
 import java.util.List;
 
-public class TouchSpellTargeter implements ISpellTargeter {
+public class TouchSpellShape implements ISpellShape {
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {

@@ -1,23 +1,23 @@
 package xyz.eddie.weavecraft.common.spell.caster.casters;
 
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.SpellSequence;
+import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.caster.ISpellCaster;
-import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
+import xyz.eddie.weavecraft.common.spell.type.ISpellType;
 
 public class SingleCaster implements ISpellCaster {
 
-    protected ISpellShape shape;
-    protected SpellSequence sequence;
+    protected ISpellType type;
+    protected ISpellEffect effect;
 
-    public SingleCaster(ISpellShape shape, SpellSequence sequence) {
-        this.shape = shape;
-        this.sequence = sequence;
+    public SingleCaster(ISpellType type, ISpellEffect effect) {
+        this.type = type;
+        this.effect = effect;
     }
 
     @Override
     public void cast(CastingContext ctx) {
-        shape.create(ctx, sequence);
+        type.create(ctx, effect);
     }
 
 }

@@ -1,18 +1,17 @@
-package xyz.eddie.weavecraft.common.spell.targeter.targeters;
+package xyz.eddie.weavecraft.common.spell.shape.shapes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
-import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
+import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class AOESpellTargeter implements ISpellTargeter {
+public class AOESpellShape implements ISpellShape {
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {

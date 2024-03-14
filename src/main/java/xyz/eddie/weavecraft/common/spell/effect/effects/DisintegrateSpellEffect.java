@@ -9,7 +9,7 @@ import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
-public class DisintegrateSpellEffect implements ISpellEffect {
+public class DisintegrateSpellEffect extends SpellEffect {
 
     @Override
     public void onHitEntity(EntityHitResult hit, final CastingContext ctx) {

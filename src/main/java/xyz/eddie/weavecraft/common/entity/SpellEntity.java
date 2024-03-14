@@ -16,7 +16,8 @@ import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.SerializationUtils;
 import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.SpellSequence;
+import xyz.eddie.weavecraft.common.spell.effect.effects.BlankSpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.kinematic_profile.IKinematicProfile;
 
 import static xyz.eddie.weavecraft.Weavecraft.LOGGER;
@@ -30,13 +31,13 @@ public class SpellEntity extends Projectile {
     private IKinematicProfile kineticFormula;
 
     private CastingContext ctx;
-    private SpellSequence spellSequence;
+    private ISpellEffect effect;
     private boolean activated = false;
     private int castingTimestamp = 0;
 
-    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKinematicProfile kineticFormula, double x, double y, double z) {
+    public SpellEntity(EntityType<SpellEntity> type, Level level, ISpellEffect effect, CastingContext ctx, IKinematicProfile kineticFormula, double x, double y, double z) {
         super(type, level);
-        this.spellSequence = spellSequence;
+        this.effect = effect;
         this.ctx = new CastingContext(ctx);
         this.kineticFormula = kineticFormula;
         this.setPos(x, y, z);
@@ -45,15 +46,15 @@ public class SpellEntity extends Projectile {
         this.ctx.setCaster(this);
     }
 
-    public SpellEntity(EntityType<SpellEntity> type, Level level, SpellSequence spellSequence, CastingContext ctx, IKinematicProfile kineticFormula, Vec3 pos) {
-        this(type, level, spellSequence, ctx, kineticFormula, pos.x, pos.y, pos.z);
+    public SpellEntity(EntityType<SpellEntity> type, Level level, ISpellEffect effect, CastingContext ctx, IKinematicProfile kineticFormula, Vec3 pos) {
+        this(type, level, effect, ctx, kineticFormula, pos.x, pos.y, pos.z);
     }
 
     public SpellEntity(SpellEntity o) {
         super(WeavecraftEntities.SPELL_ENTITY.get(), o.level());
         this.kineticFormula = o.kineticFormula;
         this.ctx = o.ctx;
-        this.spellSequence = o.spellSequence;
+        this.effect = o.effect;
         this.activated = o.activated;
         this.castingTimestamp = o.castingTimestamp;
         this.ctx.setCaster(this);
@@ -61,7 +62,7 @@ public class SpellEntity extends Projectile {
 
     private SpellEntity(EntityType<SpellEntity> type, Level level) {
         super(type, level);
-        spellSequence = new SpellSequence();
+        effect = new BlankSpellEffect();
     }
 
     public static SpellEntity getSpellEntityForRegistry(EntityType<SpellEntity> type, Level level) {
@@ -89,7 +90,7 @@ public class SpellEntity extends Projectile {
             ctx.setLocation(position());
 
             if (activated) {
-                spellSequence.activate(ctx);
+                effect.activate(ctx);
                 this.discard();
             }
 
@@ -167,7 +168,7 @@ public class SpellEntity extends Projectile {
     protected void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putInt("timestamp", castingTimestamp);
-        tag.putByteArray("spell", SerializationUtils.serialize(spellSequence));
+        tag.putByteArray("spell", SerializationUtils.serialize(effect));
         tag.putByteArray("kinetic", SerializationUtils.serialize(kineticFormula));
     }
 
@@ -176,7 +177,7 @@ public class SpellEntity extends Projectile {
         super.readAdditionalSaveData(tag);
         castingTimestamp = tag.getInt("timestamp");
         try {
-            spellSequence = (SpellSequence) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("spell"))).readObject();
+            effect = (ISpellEffect) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("spell"))).readObject();
             kineticFormula = (IKinematicProfile) new ObjectInputStream(new ByteArrayInputStream(tag.getByteArray("kinetic"))).readObject();
         } catch (IOException | RuntimeException | ClassNotFoundException e) {
             LOGGER.error("Could not load spell for spell entity:\n" + this);

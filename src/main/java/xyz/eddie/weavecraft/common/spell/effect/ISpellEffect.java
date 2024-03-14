@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 public interface ISpellEffect extends Serializable {
 
+    void activate(CastingContext ctx);
+
     default boolean onHit(HitResult hit, CastingContext ctx) {
         if(hit.getType() == HitResult.Type.ENTITY) {
             onHitEntity((EntityHitResult) hit, ctx);

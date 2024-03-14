@@ -1,14 +1,13 @@
-package xyz.eddie.weavecraft.common.spell.targeter.targeters;
+package xyz.eddie.weavecraft.common.spell.shape.shapes;
 
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
-import xyz.eddie.weavecraft.common.spell.targeter.ISpellTargeter;
-import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
+import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HitSpellTargeter implements ISpellTargeter {
+public class HitSpellShape implements ISpellShape {
 
     @Override
     public List<HitResult> gatherTargets(CastingContext ctx) {

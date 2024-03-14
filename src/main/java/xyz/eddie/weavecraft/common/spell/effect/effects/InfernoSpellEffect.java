@@ -16,7 +16,7 @@ import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.effect.ISpellEffect;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
 
-public class InfernoSpellEffect implements ISpellEffect {
+public class InfernoSpellEffect extends SpellEffect {
 
     @Override
     public void onHitBlock(BlockHitResult hit, final CastingContext ctx) {

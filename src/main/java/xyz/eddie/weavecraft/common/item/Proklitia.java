@@ -8,14 +8,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import xyz.eddie.weavecraft.common.spell.Spell;
-import xyz.eddie.weavecraft.common.spell.SpellSequence;
-import xyz.eddie.weavecraft.common.spell.caster.SpellCaster;
+import xyz.eddie.weavecraft.common.spell.caster.casters.ScatterCaster;
+import xyz.eddie.weavecraft.common.spell.caster.casters.SingleCaster;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
-import xyz.eddie.weavecraft.common.spell.kinematic_profile.KinematicProfile;
 import xyz.eddie.weavecraft.common.spell.shape.SpellShape;
-import xyz.eddie.weavecraft.common.spell.targeter.SpellTargeter;
-
-import java.util.List;
+import xyz.eddie.weavecraft.common.spell.type.SpellType;
 
 public class Proklitia extends Item {
 
@@ -24,39 +21,11 @@ public class Proklitia extends Item {
     public Proklitia(Properties properties) {
         super(properties);
 
-//        spell = new Spell(
-//                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
-//                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
-//                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
-//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
-//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
-//                        )),
-//                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE, new Spell(
-//                                SpellCaster.BIFURCATED(SpellShape.PROJECTILE,
-//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE),
-//                                        new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE))
-//                        ))
-//                )
-//        );
-
-        SpellSequence inferno = new SpellSequence(SpellEffect.INFERNO, SpellTargeter.AOE);
 
         spell = new Spell(
-                SpellCaster.SINGLE(
-                        SpellShape.PROJECTILE(KinematicProfile.LINEAR),
-                        new SpellSequence(SpellEffect.DISINTEGRATE, SpellTargeter.HIT,
-                                new Spell(
-                                        SpellCaster.BIFURCATED(
-                                                SpellShape.PROJECTILE(KinematicProfile.LINEAR),
-                                                inferno,
-                                                inferno
-                                        )
-                                )
-                        )
-                )
+                new SingleCaster(SpellType.INSTANT, SpellEffect.DETONATE.setShape(SpellShape.TOUCH))
         );
 
-        inferno.setTrigger(spell);
 
     }
 
