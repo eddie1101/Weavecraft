@@ -11,6 +11,7 @@ import xyz.eddie.weavecraft.common.spell.Spell;
 import xyz.eddie.weavecraft.common.spell.caster.casters.ScatterCaster;
 import xyz.eddie.weavecraft.common.spell.caster.casters.SingleCaster;
 import xyz.eddie.weavecraft.common.spell.effect.SpellEffect;
+import xyz.eddie.weavecraft.common.spell.effect.effects.DetonateSpellEffect;
 import xyz.eddie.weavecraft.common.spell.shape.SpellShape;
 import xyz.eddie.weavecraft.common.spell.type.SpellType;
 
@@ -21,11 +22,9 @@ public class Proklitia extends Item {
     public Proklitia(Properties properties) {
         super(properties);
 
-
         spell = new Spell(
-                new SingleCaster(SpellType.INSTANT, SpellEffect.DETONATE.setShape(SpellShape.TOUCH))
+                new SingleCaster(SpellType.INSTANT, new DetonateSpellEffect().setShape(SpellShape.TOUCH))
         );
-
 
     }
 

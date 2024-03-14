@@ -13,13 +13,6 @@ import java.util.List;
 
 public abstract class SpellEffect implements ISpellEffect {
 
-    public static final SpellEffect DETONATE = new DetonateSpellEffect();
-    public static final SpellEffect INFERNO = new InfernoSpellEffect();
-    public static final SpellEffect DISINTEGRATE = new DisintegrateSpellEffect();
-    public static final SpellEffect HARVEST = new HarvestSpellEffect();
-    public static final SpellEffect PUSH = new PushSpellEffect();
-
-
     @Nullable
     private  ISpellShape shape = null;
     @Nullable
