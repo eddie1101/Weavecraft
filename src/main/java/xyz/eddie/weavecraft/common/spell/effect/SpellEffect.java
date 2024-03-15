@@ -2,9 +2,10 @@ package xyz.eddie.weavecraft.common.spell.effect;
 
 import net.minecraft.world.phys.HitResult;
 import xyz.eddie.weavecraft.Weavecraft;
+import xyz.eddie.weavecraft.common.entity.TriggerEntity;
+import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
 import xyz.eddie.weavecraft.common.spell.CastingContext;
 import xyz.eddie.weavecraft.common.spell.Spell;
-import xyz.eddie.weavecraft.common.spell.effect.effects.*;
 import xyz.eddie.weavecraft.common.spell.shape.ISpellShape;
 
 import javax.annotation.Nullable;
@@ -38,18 +39,23 @@ public abstract class SpellEffect implements ISpellEffect {
 
     protected final void castTrigger(CastingContext ctx) {
         if(trigger != null) {
-            trigger.cast(ctx);
+            if(!ctx.getLevel().isClientSide())
+                ctx.getLevel().addFreshEntity(new TriggerEntity(WeavecraftEntities.TRIGGER_ENTITY.get(), ctx, trigger));
         }
     }
 
     @Override
     public void activate(CastingContext ctx) {
         if(shape != null) {
+            boolean miss = true;
             List<HitResult> targets = gatherTargets(ctx);
             for (HitResult hit : targets) {
                 onHit(hit, ctx);
+                if(hit.getType() != HitResult.Type.MISS) {
+                    miss = false;
+                }
             }
-            if (!targets.isEmpty()) {
+            if (!miss) {
                 castTrigger(ctx);
             }
         } else {

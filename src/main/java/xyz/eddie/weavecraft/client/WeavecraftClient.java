@@ -6,6 +6,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import xyz.eddie.weavecraft.client.render.entity.SpellRenderer;
+import xyz.eddie.weavecraft.client.render.entity.TriggerRenderer;
 import xyz.eddie.weavecraft.common.entity.SpellEntity;
 import xyz.eddie.weavecraft.common.registries.WeavecraftEntities;
 
@@ -17,6 +18,7 @@ public class WeavecraftClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(WeavecraftEntities.SPELL_ENTITY.get(), SpellRenderer::new);
+        event.registerEntityRenderer(WeavecraftEntities.TRIGGER_ENTITY.get(), TriggerRenderer::new);
     }
 
 }

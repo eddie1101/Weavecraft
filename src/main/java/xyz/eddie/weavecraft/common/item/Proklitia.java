@@ -22,9 +22,11 @@ public class Proklitia extends Item {
     public Proklitia(Properties properties) {
         super(properties);
 
+        SpellEffect recursiveDetonate = new DetonateSpellEffect().setShape(SpellShape.TOUCH);
         spell = new Spell(
-                new SingleCaster(SpellType.INSTANT, new DetonateSpellEffect().setShape(SpellShape.TOUCH))
+                new SingleCaster(SpellType.INSTANT, recursiveDetonate)
         );
+        recursiveDetonate.setTrigger(spell);
 
     }
 
