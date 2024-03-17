@@ -18,8 +18,11 @@ public class TriggerEntity extends Entity {
     public TriggerEntity(EntityType<TriggerEntity> type, CastingContext ctx, Spell trigger) {
         super(type, ctx.getLevel());
         timestamp = tickCount;
+        ctx.setCaster(this);
         this.ctx = ctx;
         this.trigger = trigger;
+
+        setPos(ctx.getLocation());
     }
 
     private TriggerEntity(EntityType<TriggerEntity> type, Level level) {
@@ -35,7 +38,7 @@ public class TriggerEntity extends Entity {
 
     @Override
     public void tick() {
-        if(tickCount - timestamp > 20) {
+        if(tickCount - timestamp > 2) {
             trigger.cast(ctx);
             this.discard();
         }

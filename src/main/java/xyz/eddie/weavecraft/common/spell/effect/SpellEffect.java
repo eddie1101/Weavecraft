@@ -39,8 +39,10 @@ public abstract class SpellEffect implements ISpellEffect {
 
     protected final void castTrigger(CastingContext ctx) {
         if(trigger != null) {
-            if(!ctx.getLevel().isClientSide())
-                ctx.getLevel().addFreshEntity(new TriggerEntity(WeavecraftEntities.TRIGGER_ENTITY.get(), ctx, trigger));
+            if(!ctx.getLevel().isClientSide()) {
+                TriggerEntity te = new TriggerEntity(WeavecraftEntities.TRIGGER_ENTITY.get(), ctx, trigger);
+                ctx.getLevel().addFreshEntity(te);
+            }
         }
     }
 
